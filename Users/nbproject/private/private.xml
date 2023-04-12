@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/login/LoginController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/utils/MyConnectionn.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/entity/User.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/main.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/editprofil/EditprofilController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/editpassword/EditpasswordController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/user_crud.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/profil/ProfilController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/admin/admin.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/editprofil/editprofil.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/Users.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/admin/MyData.java</file>
+        </group>
+    </open-files>
+</project-private>
