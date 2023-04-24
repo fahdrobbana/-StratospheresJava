@@ -37,8 +37,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import pidev3a31.Pidev3A31;
 import services.EvenementService;
 
 /**
@@ -89,6 +91,10 @@ public class EvenementController implements Initializable {
     private Label error_lieu;
     @FXML
     private Label error_description;
+    @FXML
+    private TextField tfrecherche;
+    @FXML
+    private ComboBox<String> cbrechpar;
 
     /**
      * Initializes the controller class.
@@ -97,6 +103,7 @@ public class EvenementController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cbnbper.setItems((FXCollections.observableArrayList(2,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30)));
         updateTable();
+          cbrechpar.setItems(FXCollections.observableArrayList("nom", "lieu", "date", "description", "datefin","nbr_personnes"));
 
     }
 
@@ -231,6 +238,40 @@ datefincb.setValue(d1);
     @FXML
     private void backbtnmenu(MouseEvent event) {
          GotoFXML("participation", "Participation", event);
+    }
+
+    @FXML
+    private void statistique(ActionEvent event) {
+         Stage stageclose=(Stage)((Node)event.getSource()).getScene().getWindow();
+        stageclose.close();
+        try {
+            Parent root=FXMLLoader.load(getClass().getResource("/vues/statevenement.fxml"));
+            Scene scene = new Scene(root);
+            Stage primaryStage=new Stage();
+            primaryStage.setTitle("Evenement!");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(Pidev3A31.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void SearchEvent(KeyEvent event) {
+         String search = tfrecherche.getText();
+        if (search == null) {
+            updateTable();
+        } else {
+            String searchby = cbrechpar.getSelectionModel().getSelectedItem();
+            ObservableList<Evenement> Events = ev.recherche(searchby, search);
+             colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        collieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        coldescrip.setCellValueFactory(new PropertyValueFactory<>("description"));
+        coldatefin.setCellValueFactory(new PropertyValueFactory<>("datefin"));
+        colnbrp.setCellValueFactory(new PropertyValueFactory<>("nbr_personnes"));
+         tableevent.setItems(Events);
+        }
     }
      
 

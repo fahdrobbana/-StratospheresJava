@@ -13,18 +13,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.EvenementController">
    <children>
       <Accordion layoutX="52.0" layoutY="86.0" />
-      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="650.0" prefWidth="950.0" style="-fx-border-color: #6aa84f;">
+      <Label fx:id="error_description" layoutX="37.0" layoutY="501.0" prefHeight="17.0" prefWidth="250.0" />
+      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="650.0" prefWidth="950.0" style="-fx-border-color: #6aa84f;">
          <children>
             <DatePicker fx:id="datefincb" layoutX="57.0" layoutY="362.0" prefHeight="30.0" prefWidth="200.0" promptText="DateFin de l'evenement" style="-fx-border-color: #6aa84f;" />
             <ComboBox fx:id="cbnbper" layoutX="57.0" layoutY="412.0" prefHeight="30.0" prefWidth="200.0" promptText="Nombres de personnes" style="-fx-border-color: #6aa84f;" />
             <TextField fx:id="tfnom" layoutX="58.0" layoutY="219.0" prefHeight="30.0" prefWidth="200.0" promptText="Nom de l'evenement" style="-fx-border-color: #6aa84f;">
                <opaqueInsets>
                   <Insets />
-               </opaqueInsets></TextField>
+               </opaqueInsets>
+            </TextField>
             <TextField fx:id="tfdescrip" layoutX="58.0" layoutY="461.0" prefHeight="30.0" prefWidth="200.0" promptText="Description" style="-fx-border-color: #6aa84f;" />
             <TableView fx:id="tableevent" layoutX="282.0" layoutY="135.0" onMouseClicked="#preModSupp" prefHeight="422.0" prefWidth="638.0" style="-fx-border-color: #6aa84f;">
                <columns>
@@ -57,18 +60,24 @@
             <TextField fx:id="tflieu" layoutX="57.0" layoutY="266.0" prefHeight="30.0" prefWidth="200.0" promptText="Lieu de l'evenement" style="-fx-border-color: #6aa84f;" />
             <ImageView fx:id="bqckbtn" fitHeight="62.0" fitWidth="88.0" layoutX="828.0" layoutY="51.0" onMouseClicked="#backbtnmenu" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../ressources/back.png" />
+                  <Image url="@../../../../pidev3A31/src/ressources/back.png" />
                </image>
             </ImageView>
             <Label fx:id="error_nom" layoutX="32.0" layoutY="249.0" prefHeight="17.0" prefWidth="250.0" />
             <Label fx:id="error_lieu" layoutX="33.0" layoutY="295.0" prefHeight="17.0" prefWidth="250.0" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="65.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../ressources/gfllogo.png" />
+                  <Image url="@../../../../pidev3A31/src/ressources/gfllogo.png" />
                </image>
             </ImageView>
+            <Button layoutX="859.0" layoutY="575.0" mnemonicParsing="false" onAction="#statistique" text="Statistique" />
+            <TextField fx:id="tfrecherche" layoutX="570.0" layoutY="95.0" onKeyReleased="#SearchEvent" prefHeight="30.0" prefWidth="150.0" promptText="Recherche" style="-fx-border-color: #6aa84f;">
+               <font>
+                  <Font name="Monospaced Bold" size="12.0" />
+               </font>
+            </TextField>
+            <ComboBox fx:id="cbrechpar" layoutX="400.0" layoutY="95.0" prefHeight="30.0" prefWidth="150.0" promptText="nom" style="-fx-border-color: #6aa84f;" />
          </children>
       </AnchorPane>
-      <Label fx:id="error_description" layoutX="37.0" layoutY="501.0" prefHeight="17.0" prefWidth="250.0" />
    </children>
 </AnchorPane>

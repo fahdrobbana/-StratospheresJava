@@ -160,5 +160,23 @@ public int GetIdEvent(String value) {
         }
         return nom;
     }
+  public ObservableList<Evenement> recherche(String searchby, String value) {
+        String req = "select * from evenement where " + searchby + " like '%" + value + "%'";
+
+        ObservableList<Evenement> list = FXCollections.observableArrayList();
+        try {
+            ste = conn.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {//parcourir le resultset
+                list.add(new Evenement(rs.getInt("id"), rs.getString("nom"), rs.getString("lieu"),rs.getDate("date"), rs.getString("description"),rs.getDate("datefin"), rs.getInt("nbr_personnes")));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementService.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
 }
