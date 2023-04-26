@@ -40,6 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pidev3a31.Pidev3A31;
 import services.EvenementService;
 
@@ -95,13 +96,15 @@ public class EvenementController implements Initializable {
     private TextField tfrecherche;
     @FXML
     private ComboBox<String> cbrechpar;
+    @FXML
+    private Button stat;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cbnbper.setItems((FXCollections.observableArrayList(2,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30)));
+        cbnbper.setItems((FXCollections.observableArrayList(2,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,40,50,100)));
         updateTable();
           cbrechpar.setItems(FXCollections.observableArrayList("nom", "lieu", "date", "description", "datefin","nbr_personnes"));
 
@@ -240,7 +243,6 @@ datefincb.setValue(d1);
          GotoFXML("participation", "Participation", event);
     }
 
-    @FXML
     private void statistique(ActionEvent event) {
          Stage stageclose=(Stage)((Node)event.getSource()).getScene().getWindow();
         stageclose.close();
@@ -271,6 +273,23 @@ datefincb.setValue(d1);
         coldatefin.setCellValueFactory(new PropertyValueFactory<>("datefin"));
         colnbrp.setCellValueFactory(new PropertyValueFactory<>("nbr_personnes"));
          tableevent.setItems(Events);
+        }
+    }
+
+    @FXML
+    private void OnClickedStatistique(ActionEvent event) {
+          try {
+
+            Parent parent = FXMLLoader.load(getClass().getResource("Piechart.fxml"));
+            Scene scene = new Scene(parent);
+
+            Stage stage = new Stage();
+ 
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(EvenementController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      

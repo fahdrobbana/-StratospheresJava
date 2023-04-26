@@ -151,4 +151,40 @@ public class ParticipationService {
         }
 
     }
+    public int rowPartic() {
+        ObservableList<Participation> liste = FXCollections.observableArrayList();
+        String req = "SELECT * FROM participation";
+        int i = 0;
+
+        try {
+            conn = DataSource.getInstance().getCnx();
+            ste = conn.createStatement();
+            rs = ste.executeQuery(req);
+            Participation participation1;
+            while (rs.next()) {
+                i = i + 1;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    /* Ignored */
+                }
+            }
+            if (ste != null) {
+                try {
+                    ste.close();
+                } catch (SQLException e) {
+                    /* Ignored */
+                }
+            }
+        }
+        return i;
+
+    }
+
 }

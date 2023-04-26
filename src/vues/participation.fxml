@@ -73,5 +73,10 @@
             <Font name="Monospaced Bold" size="12.0" />
          </font>
       </TextField>
+      <Button fx:id="pdf" layoutX="766.0" layoutY="509.0" mnemonicParsing="false" onAction="#Pdf" prefHeight="30.0" prefWidth="130.0" style="-fx-border-color: #6aa84f;" text="Pdf">
+         <font>
+            <Font name="Monospaced Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
