@@ -16,11 +16,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.EvenementController">
+<AnchorPane id="AnchorPane" prefHeight="691.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.EvenementController">
    <children>
-      <Accordion layoutX="52.0" layoutY="86.0" />
-      <Label fx:id="error_description" layoutX="37.0" layoutY="501.0" prefHeight="17.0" prefWidth="250.0" />
-      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="650.0" prefWidth="950.0" style="-fx-border-color: #6aa84f;">
+      <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="650.0" prefWidth="900.0" style="-fx-border-color: #6aa84f;">
          <children>
             <DatePicker fx:id="datefincb" layoutX="57.0" layoutY="362.0" prefHeight="30.0" prefWidth="200.0" promptText="DateFin de l'evenement" style="-fx-border-color: #6aa84f;" />
             <ComboBox fx:id="cbnbper" layoutX="57.0" layoutY="412.0" prefHeight="30.0" prefWidth="200.0" promptText="Nombres de personnes" style="-fx-border-color: #6aa84f;" />
@@ -71,12 +69,12 @@
                   <Image url="@../ressources/gfllogo.png" />
                </image>
             </ImageView>
-            <TextField fx:id="tfrecherche" layoutX="570.0" layoutY="95.0" onKeyReleased="#SearchEvent" prefHeight="30.0" prefWidth="150.0" promptText="Recherche" style="-fx-border-color: #6aa84f;">
+            <TextField fx:id="tfrecherche" layoutX="443.0" layoutY="95.0" onKeyReleased="#SearchEvent" prefHeight="30.0" prefWidth="150.0" promptText="Recherche" style="-fx-border-color: #6aa84f;">
                <font>
                   <Font name="Monospaced Bold" size="12.0" />
                </font>
             </TextField>
-            <ComboBox fx:id="cbrechpar" layoutX="400.0" layoutY="95.0" prefHeight="30.0" prefWidth="150.0" promptText="nom" style="-fx-border-color: #6aa84f;" />
+            <ComboBox fx:id="cbrechpar" layoutX="283.0" layoutY="95.0" prefHeight="30.0" prefWidth="150.0" promptText="nom" style="-fx-border-color: #6aa84f;" />
             <Button fx:id="stat" layoutX="781.0" layoutY="581.0" mnemonicParsing="false" onAction="#OnClickedStatistique" prefHeight="30.0" prefWidth="130.0" style="-fx-border-color: #6aa84f;" text="Statistiques">
                <font>
                   <Font name="Monospaced Bold" size="12.0" />
@@ -87,5 +85,10 @@
             </Button>
          </children>
       </AnchorPane>
+      <Button fx:id="btntri" layoutX="690.0" layoutY="113.0" mnemonicParsing="false" onAction="#TriDates" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #6aa84f;" text="Tri Par Date">
+         <font>
+            <Font name="Monospaced Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

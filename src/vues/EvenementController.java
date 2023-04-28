@@ -12,9 +12,12 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,13 +94,13 @@ public class EvenementController implements Initializable {
     @FXML
     private Label error_lieu;
     @FXML
-    private Label error_description;
-    @FXML
     private TextField tfrecherche;
     @FXML
     private ComboBox<String> cbrechpar;
     @FXML
     private Button stat;
+    @FXML
+    private Button btntri;
 
     /**
      * Initializes the controller class.
@@ -105,12 +108,14 @@ public class EvenementController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbnbper.setItems((FXCollections.observableArrayList(2,5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,40,50,100)));
-        updateTable();
+        updateTableEvent();
           cbrechpar.setItems(FXCollections.observableArrayList("nom", "lieu", "date", "description", "datefin","nbr_personnes"));
+          tableevent.setItems(FXCollections.observableArrayList(ev.readEvent()));
+          
 
     }
 
-    public void updateTable() {
+    public void updateTableEvent() {
         ObservableList<Evenement> Events = ev.readEvent();
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         collieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
@@ -132,7 +137,7 @@ public class EvenementController implements Initializable {
         alert.showAndWait();
     }
     public void init() {
-        updateTable();
+        updateTableEvent();
         tfnom.clear();
         tflieu.clear();
         datecb.setValue(null);
@@ -186,7 +191,7 @@ datefincb.setValue(d1);
         ev.modifierEvenementPst(e);
         tableevent.refresh();
         tableevent.getSelectionModel().select(e);
-        updateTable();
+        updateTableEvent();
         init();
     }
 
@@ -262,7 +267,7 @@ datefincb.setValue(d1);
     private void SearchEvent(KeyEvent event) {
          String search = tfrecherche.getText();
         if (search == null) {
-            updateTable();
+            updateTableEvent();
         } else {
             String searchby = cbrechpar.getSelectionModel().getSelectedItem();
             ObservableList<Evenement> Events = ev.recherche(searchby, search);
@@ -292,6 +297,16 @@ datefincb.setValue(d1);
             Logger.getLogger(EvenementController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
 
+    @FXML
+    private void TriDates(ActionEvent event) {
+        
+ ObservableList<Evenement> Events = FXCollections.observableArrayList(ev.readEvent()
+            .stream()
+            .sorted(Comparator.comparing(Evenement::getDate))
+            .collect(Collectors.toList()));
+    tableevent.setItems(Events);
+}
+    
+     
 }

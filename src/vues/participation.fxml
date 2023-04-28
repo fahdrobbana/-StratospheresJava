@@ -11,29 +11,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.ParticipationController">
+<AnchorPane id="AnchorPane" prefHeight="691.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vues.ParticipationController">
    <children>
       <TextField fx:id="tfnom" layoutX="32.0" layoutY="228.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;">
          <font>
             <Font name="Monospaced Bold" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="btncreate" layoutX="90.0" layoutY="450.0" mnemonicParsing="false" onAction="#CreatePartic" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" text="Ajouter">
+      <Button fx:id="btncreate" layoutX="96.0" layoutY="474.0" mnemonicParsing="false" onAction="#CreatePartic" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" text="Ajouter">
          <font>
             <Font name="Monospaced Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnmodif" layoutX="90.0" layoutY="495.0" mnemonicParsing="false" onAction="#ModifPartic" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" text="Modifier">
-         <font>
-            <Font name="Monospaced Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btndel" layoutX="90.0" layoutY="539.0" mnemonicParsing="false" onAction="#DeletePartic" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" text="Supprimer">
-         <font>
-            <Font name="Monospaced Bold" size="12.0" />
-         </font>
-      </Button>
-      <ComboBox fx:id="cbev" layoutX="31.0" layoutY="401.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom de l'evenement" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" />
+      <ComboBox fx:id="cbev" layoutX="32.0" layoutY="436.0" prefHeight="30.0" prefWidth="250.0" promptText="Nom de l'evenement" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../ressources/gfllogo.png" />
@@ -49,15 +39,6 @@
             <Image url="@../ressources/back.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tablepartic" layoutX="292.0" layoutY="145.0" onMouseClicked="#preModSupp" prefHeight="334.0" prefWidth="638.0" style="-fx-border-color: #6aa84f;">
-         <columns>
-            <TableColumn fx:id="colnom" prefWidth="60.0" text="Nom" />
-            <TableColumn fx:id="colprenom" prefWidth="98.0" text="Prenom" />
-            <TableColumn fx:id="coladresse" prefWidth="125.0" text="Adresse" />
-            <TableColumn fx:id="colemail" prefWidth="202.0" text="Email" />
-            <TableColumn fx:id="colidevent" prefWidth="151.0" text="Id_Event" />
-         </columns>
-      </TableView>
       <TextField fx:id="tfprenom" layoutX="31.0" layoutY="270.0" prefHeight="30.0" prefWidth="250.0" promptText="Prenom" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;">
          <font>
             <Font name="Monospaced Bold" size="12.0" />
@@ -74,6 +55,27 @@
          </font>
       </TextField>
       <Button fx:id="pdf" layoutX="766.0" layoutY="509.0" mnemonicParsing="false" onAction="#Pdf" prefHeight="30.0" prefWidth="130.0" style="-fx-border-color: #6aa84f;" text="Pdf">
+         <font>
+            <Font name="Monospaced Bold" size="12.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tableevent" layoutX="290.0" layoutY="137.0" prefHeight="422.0" prefWidth="638.0" style="-fx-border-color: #6aa84f;">
+         <columns>
+            <TableColumn fx:id="colnom" prefWidth="60.0" text="Nom" />
+            <TableColumn fx:id="collieu" prefWidth="98.0" text="Lieu" />
+            <TableColumn fx:id="coldate" prefWidth="125.0" text="Date" />
+            <TableColumn fx:id="coldatefin" prefWidth="104.0" text="DateFin" />
+            <TableColumn fx:id="colnbrp" prefWidth="122.0" text="Nombre Personnes" />
+            <TableColumn fx:id="coldescrip" maxWidth="127.0" prefWidth="127.0" text="Description" />
+         </columns>
+      </TableView>
+      <TextField fx:id="tfrecherche" layoutX="470.0" layoutY="100.0" promptText="Recherche" style="-fx-background-radius: 15;" />
+      <TextField fx:id="tfnum" layoutX="32.0" layoutY="392.0" prefHeight="30.0" prefWidth="250.0" promptText="Numero" style="-fx-background-color: #a9a9a9 , white , white; -fx-border-color: #6aa84f;">
+         <font>
+            <Font name="Monospaced Bold" size="12.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btntri" layoutX="652.0" layoutY="97.0" mnemonicParsing="false" onAction="#TriDates" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #6aa84f;" text="Tri Par Date">
          <font>
             <Font name="Monospaced Bold" size="12.0" />
          </font>

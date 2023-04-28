@@ -14,28 +14,39 @@ public class Participation {
     private int id;
     private int event_id;
     private String nom, prenom, adresse, email;
+     private int num_tel;
    
 
     public Participation() {
     }
 
-    public Participation(int id, int event_id, String nom, String prenom, String adresse, String email) {
+    public Participation(int id, int event_id, String nom, String prenom, String adresse, String email,int num_tel) {
         this.id = id;
         this.event_id = event_id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.email = email;
+        this.num_tel= num_tel;
        
     }
 
-    public Participation(int event_id, String nom, String prenom, String adresse, String email) {
+    public Participation(int event_id, String nom, String prenom, String adresse, String email, int num_tel) {
         this.event_id = event_id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.email = email;
+        this.num_tel= num_tel;
        
+    }
+
+    public int getNum_tel() {
+        return num_tel;
+    }
+
+    public void setNum_tel(int num_tel) {
+        this.num_tel = num_tel;
     }
 
     public Participation(int id) {
@@ -90,12 +101,14 @@ public class Participation {
         this.email = email;
     }
 
-  
-
     @Override
     public String toString() {
-        return "Participation{" + "id=" + id + ", event_id=" + event_id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email +'}';
+        return "Participation{" + "id=" + id + ", event_id=" + event_id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + ", num_tel=" + num_tel + '}';
     }
+
+  
+
+    
     
 
   

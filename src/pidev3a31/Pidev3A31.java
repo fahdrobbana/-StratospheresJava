@@ -28,7 +28,7 @@ public class Pidev3A31 extends Application{
 
     @Override
     public void start(Stage primaryStage) throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/vues/evenement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vues/participation.fxml"));
         primaryStage.getIcons().add(new Image("/ressources/gfllogo.png"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("GFL");

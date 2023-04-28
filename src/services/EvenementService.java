@@ -178,5 +178,20 @@ public int GetIdEvent(String value) {
         }
         return list;
     }
+  public ObservableList<Evenement> tri() {
+      String req = "select * from evenement order by date desc";
 
+    ObservableList<Evenement> list = FXCollections.observableArrayList();
+    try {
+        
+        ste = conn.createStatement();
+        rs = ste.executeQuery(req);
+        while (rs.next()) {
+           list.add(new Evenement(rs.getInt("id"), rs.getString("nom"), rs.getString("lieu"),rs.getDate("date"), rs.getString("description"),rs.getDate("datefin"), rs.getInt("nbr_personnes")));
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return list;
+}
 }

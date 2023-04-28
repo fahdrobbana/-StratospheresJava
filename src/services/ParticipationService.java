@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import utils.DataSource;
+import vues.EnvoyerSMS;
 
 /**
  *
@@ -35,7 +36,7 @@ public class ParticipationService {
 
     public boolean ajouterParticipation(Participation p) {
 
-        String req = "insert into participation (nom,prenom,adresse,email,event_id) values (?,?,?,?,?)";
+        String req = "insert into participation (nom,prenom,adresse,email,num_tel,event_id) values (?,?,?,?,?,?)";
         if (checkfull(p.getEvent_id())) {
             try {
                 pst = conn.prepareStatement(req);
@@ -44,10 +45,13 @@ public class ParticipationService {
                 pst.setString(2, p.getPrenom());
                 pst.setString(3, p.getAdresse());
                 pst.setString(4, p.getEmail());
-                pst.setInt(5, p.getEvent_id());
+                pst.setInt(5, p.getNum_tel());
+                pst.setInt(6, p.getEvent_id());
                 pst.executeUpdate();
+              
 
                 return true;
+                
 
             } catch (SQLException ex) {
                 Logger.getLogger(ParticipationService.class
@@ -109,7 +113,7 @@ public class ParticipationService {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {//parcourir le resultset
-                list.add(new Participation(rs.getInt("id"), rs.getInt("event_id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("email")));
+                list.add(new Participation(rs.getInt("id"), rs.getInt("event_id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("email"), rs.getInt("num_tel")));
             }
 
         } catch (SQLException ex) {
@@ -120,7 +124,7 @@ public class ParticipationService {
     }
 
     public void modifierParticipationPst(Participation p) {
-        String req = "update participation set nom= ?,  prenom= ?, adresse= ?, email= ?, event_id= ? where id = ?";
+        String req = "update participation set nom= ?,  prenom= ?, adresse= ?, email= ?,num_tel= ?, event_id= ? where id = ?";
 
         try {
             pst = conn.prepareStatement(req);
@@ -128,8 +132,9 @@ public class ParticipationService {
             pst.setString(2, p.getPrenom());
             pst.setString(3, p.getAdresse());
             pst.setString(4, p.getEmail());
-            pst.setInt(5, p.getEvent_id());
-            pst.setInt(6, p.getId());
+             pst.setInt(5, p.getNum_tel());
+            pst.setInt(6, p.getEvent_id());
+            pst.setInt(7, p.getId());
             pst.executeUpdate();
 
         } catch (SQLException ex) {

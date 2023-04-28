@@ -36,7 +36,6 @@ public class Evenement {
         this.lieu = lieu;
         this.date = date;
         this.description = description;
-    
         this.datefin = datefin;
         this.nbr_personnes = nbr_personnes;
     }

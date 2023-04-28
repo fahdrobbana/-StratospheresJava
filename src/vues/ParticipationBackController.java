@@ -28,8 +28,6 @@ import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.twilio.Twilio;
-import entities.Evenement;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -37,7 +35,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -63,22 +60,13 @@ import javax.swing.JFileChooser;
 import services.EvenementService;
 import services.ParticipationService;
 import sun.misc.IOUtils;
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
-import java.io.File;
-import java.util.Comparator;
-import java.util.stream.Collectors;
-import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import services.MyListener;
 
 
 /**
  *
  * @author joujo
  */
-public class ParticipationController implements Initializable {
+public class ParticipationBackController implements Initializable {
 
     @FXML
     private TextField tfnom;
@@ -88,11 +76,22 @@ public class ParticipationController implements Initializable {
     private TextField tfadresse;
     @FXML
     private TextField tfemail;
+   
     @FXML
-    private Button btncreate;
+    private Button btnmodif;
+    @FXML
+    private Button btndel;
 
+    @FXML
     private TableView<Participation> tablepartic;
-  
+    @FXML
+    private TableColumn<Participation, String> colnom;
+    @FXML
+    private TableColumn<Participation, String> colprenom;
+    @FXML
+    private TableColumn<Participation, String> coladresse;
+    @FXML
+    private TableColumn<Participation, String> colemail;
 
     @FXML
     private ComboBox<String> cbev;
@@ -105,53 +104,37 @@ public class ParticipationController implements Initializable {
     @FXML
     private ImageView bqckbtn;
 
+    @FXML
     private TableColumn<?, ?> colidevent;
+   
+    @FXML
+    private Button pdf;
     @FXML
     private Label UserName;
     @FXML
-    private Button pdf;
-   @FXML
-    private TableView<Evenement> tableevent;
-    @FXML
-    private TableColumn<Evenement, String> collieu;
-    @FXML
-    private TableColumn<Evenement, Date> coldate;
-    @FXML
-    private TableColumn<?, ?> coldatefin;
-    @FXML
-    private TableColumn<?, ?> colnbrp;
-    @FXML
-    private TableColumn<?, ?> coldescrip;
-    @FXML
-    private TextField tfrecherche;
-    @FXML
-    private TableColumn<Evenement, String> colnom;
-    private Label idgetter;
+    private TableColumn<?, ?> colnum;
     @FXML
     private TextField tfnum;
-    @FXML
-    private Button btntri;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.nomevent = ev.GetNamesEvent();
         cbev.setItems(nomevent);
-        updateTableEvent();
-       
+        updateTable();
     }
 
-   
-    public void updateTableEvent() {
-        ObservableList<Evenement> Events = ev.readEvent();
+    public void updateTable() {
+        ObservableList<Participation> Partic = rv.readPraticipation();
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        collieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
-        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        coldescrip.setCellValueFactory(new PropertyValueFactory<>("description"));
-        coldatefin.setCellValueFactory(new PropertyValueFactory<>("datefin"));
-        colnbrp.setCellValueFactory(new PropertyValueFactory<>("nbr_personnes"));
+        colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        coladresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
+          colnum.setCellValueFactory(new PropertyValueFactory<>("num_tel"));
+        colidevent.setCellValueFactory(new PropertyValueFactory<>("event_id"));
 
-        tableevent.setItems(Events);
-       
+        tablepartic.setItems(Partic);
+
     }
 
     public void AlertWindow(String title, String contenu, Alert.AlertType type) {
@@ -164,15 +147,13 @@ public class ParticipationController implements Initializable {
     }
 
     public void init() {
-      
+        updateTable();
         tfnom.clear();
         tfprenom.clear();
         tfadresse.clear();
         tfemail.clear();
-        tfnum.clear();
+         tfnum.clear();
         cbev.setValue(null);
-        
-        updateTableEvent();
 
     }
 
@@ -181,7 +162,7 @@ public class ParticipationController implements Initializable {
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
-         int num_tel = Integer.valueOf(tfnum.getText());
+          int num_tel = Integer.valueOf(tfnum.getText());
         String nomEV = cbev.getSelectionModel().getSelectedItem();
 
         if (nom.isEmpty()) {
@@ -227,7 +208,33 @@ public class ParticipationController implements Initializable {
         alert.showAndWait();
     }
 
-   
+    @FXML
+    private void ModifPartic(ActionEvent event) {
+        if (!validateFields()) {
+            return;
+        }
+        Participation p = tablepartic.getSelectionModel().getSelectedItem();
+
+        String nom = tfnom.getText();
+        String prenom = tfprenom.getText();
+        String adresse = tfadresse.getText();
+        String email = tfemail.getText();
+         int num_tel = Integer.valueOf(tfnum.getText());
+        String nomEV = cbev.getSelectionModel().getSelectedItem();
+        int event_id = ev.GetIdEvent(nomEV);
+
+        p.setNom(nom);
+        p.setPrenom(prenom);
+        p.setAdresse(adresse);
+        p.setEmail(email);
+        p.setNum_tel(num_tel);
+        p.setEvent_id(event_id);
+        rv.modifierParticipationPst(p);
+        tablepartic.refresh();
+        tablepartic.getSelectionModel().select(p);
+        updateTable();
+        init();
+    }
 
     private void GotoFXML(String vue, String title, Event aEvent) {
         try {
@@ -239,58 +246,40 @@ public class ParticipationController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex) {
-            Logger.getLogger(ParticipationBackController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EvenementController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void backbtnmenu(MouseEvent event) {
-        GotoFXML("participationback", "ParticipationBack", event);
+        GotoFXML("evenement", "Evenement", event);
     }
 
+    @FXML
+    private void preModSupp(MouseEvent event) {
+        Participation p = tablepartic.getSelectionModel().getSelectedItem();
+        System.out.println(p.getId());
+        tfnom.setText(p.getNom());
+        tfprenom.setText(p.getPrenom());
+        tfadresse.setText(p.getAdresse());
+        tfemail.setText(p.getEmail());
+          tfnum.setText(String.valueOf(p.getNum_tel()));
+        String nomEvent = ev.GetNomEventbyId(p.getEvent_id());
+        cbev.setValue(nomEvent);
+    }
 
 
     @FXML
-    private void CreatePartic(ActionEvent event) {
-        String nom = tfnom.getText();
-        String prenom = tfprenom.getText();
-        String adresse = tfadresse.getText();
-        String email = tfemail.getText();
-         int num_tel = Integer.valueOf(tfnum.getText());
-
-        String nomEV = cbev.getSelectionModel().getSelectedItem();
-        int event_id = ev.GetIdEvent(nomEV);
-        System.out.println(event_id);
-
-        Participation r = new Participation(event_id, nom, prenom, adresse, email,num_tel);
-        if (nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || email.isEmpty()||num_tel==0) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Erreur de saisie");
-            alert.setHeaderText(null);
-            alert.setContentText("veuillez remplir le formulaire ");
-            alert.showAndWait();
-            
-            return;
-        }
-
-        if (rv.ajouterParticipation(r)) {
-            AlertWindow("Ajout avec succées", "Nouvelle Participation ", Alert.AlertType.INFORMATION);
-            EnvoyerSMS sms = new EnvoyerSMS();
-                        String toPhoneNumber = "+21627839355"; // Numéro de téléphone 
-                        String message= "Votre participation est ajoute"; // Contenu du SMS à envoyer
-                        sms.send(toPhoneNumber, message);
-        } else {
-            AlertWindow("Echec d'ajout", "L'évenement atteint le nombre maximum des personnes  ", Alert.AlertType.ERROR);
-        }
-
+    private void DeletePartic(ActionEvent event) {
+        Participation p = tablepartic.getSelectionModel().getSelectedItem();
+        rv.suppParticipationPst(p);
         init();
-    }
 
-   
+    }
 
     @FXML
     private void Pdf(ActionEvent event) {
-        String path = "";
+         String path = "";
         JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int x = j.showSaveDialog(null);
@@ -401,60 +390,5 @@ public class ParticipationController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-    
-     
-      public void selectedEvenement(Evenement e){
-        idgetter.setText(e.getId()+"");
-    }
-       MyListener myListener;
-    public void recherche_avance(){
-     
-               ObservableList<Evenement> Events = FXCollections.observableArrayList(ev.readEvent());
-    FilteredList<Evenement> filteredData = new FilteredList<>(Events, e -> true);
-   tableevent.setItems(filteredData);
-  
-            myListener=new MyListener() {
-                @Override
-                public void onclickListener(Evenement e) {
-                    selectedEvenement(e);
-                  
-                    
-                }
-            };
-    tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
-        filteredData.setPredicate(event -> {
-            if (newValue == null || newValue.isEmpty()) {
-                return true;
-            }
-            String newValuelowercase = newValue.toLowerCase();
-            if (event.getNom().toLowerCase().contains(newValuelowercase)) {
-                return true;
-            }
-            else if (event.getLieu().toLowerCase().contains(newValuelowercase)) {
-                return true;
-            }
-          
-            else if (String.valueOf(event.getDate()).toLowerCase().contains(newValuelowercase)) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        });
-        tableevent.setItems(filteredData);
-    });
-    
-}
-
-    @FXML
-    private void TriDates(ActionEvent event) {
-               
- ObservableList<Evenement> Events = FXCollections.observableArrayList(ev.readEvent()
-            .stream()
-            .sorted(Comparator.comparing(Evenement::getDate))
-            .collect(Collectors.toList()));
-    tableevent.setItems(Events);
     }
 }
