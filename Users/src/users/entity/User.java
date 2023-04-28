@@ -12,7 +12,15 @@ public class User {
 
     private int id;
     private String email, roles, password, name, firstname, reset_token, image;
-    private boolean is_verified;
+    private boolean is_verified,blocked=false;
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
 
     public User() {
     }
@@ -60,6 +68,16 @@ public class User {
         this.image = image;
         this.is_verified = is_verified;
     }
+
+    public User(String email, String password, String name, String firstname, String reset_token, String image) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.firstname = firstname;
+        this.reset_token = reset_token;
+        this.image = image;
+    }
+    
 
     public int getId() {
         return id;
@@ -135,7 +153,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + ", email=" + email + ", roles=" + roles + ", password=" + password + ", name=" + name + ", firstname=" + firstname + ", image=" + image + ", is_verified=" + is_verified + '}';
+        return "User{" + ", email=" + email + ", roles=" + roles + ", password=" + password + ", name=" + name + ", firstname=" + firstname + ", image=" + image + ", is_verified=" + is_verified + ", isblocked=" + blocked +  '}';
     }
 
 }

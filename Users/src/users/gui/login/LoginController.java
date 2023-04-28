@@ -20,8 +20,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import users.entity.User;
 import users.gui.admin.DashAdminController;
 import users.services.user_crud;
 
@@ -55,6 +57,16 @@ public class LoginController implements Initializable {
         String mdp = Password_id.getText();
         user_crud uc = new user_crud();
         userc = uc.login(mdp, eml) ; 
+        User u = uc.getByID(userc);
+        if(u.isBlocked())
+         {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("you are blocked by an admin!");
+            alert.showAndWait();
+            return ;
+        }
         if(userc!=0)
         {
             FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../profil/profil.fxml"));
@@ -64,6 +76,7 @@ public class LoginController implements Initializable {
                     stage.setScene(new Scene(root2));
                     stage.show();
         }
+         
         else
         {
             Alert alert = new Alert(AlertType.ERROR);
@@ -86,5 +99,18 @@ public class LoginController implements Initializable {
         }
         
     }
+
+    @FXML
+    private void forgetbtn(MouseEvent event) {
+        try {
+            Parent sv;
+            sv = (AnchorPane) FXMLLoader.load(getClass().getResource("ForgetPasword.fxml"));
+            pane.getChildren().removeAll();
+            pane.getChildren().setAll(sv);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }

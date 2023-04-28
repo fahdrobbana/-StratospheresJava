@@ -16,6 +16,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -46,10 +48,12 @@ MyData v ;
     private AnchorPane pane;
     
     public static int idprof; 
+    @FXML
+    private TextField searchfield;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+      
         /**
          * *****************************************************************
          */
@@ -94,6 +98,17 @@ MyData v ;
 
         });
     
+        searchfield.setPromptText("Filter");
+               
+
+        // Create a FilteredList that will hold the filtered data
+        FilteredList<MyData> filteredData = new FilteredList<>(data);
+
+        // Bind the FilteredList to the ListView and the TextField
+        lv.setItems(filteredData);
+        searchfield.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredData.setPredicate(item -> newValue == null || newValue.isEmpty() ||
+                        item.getName().toLowerCase().contains(newValue.toLowerCase())));    
     }    
 
     @FXML
@@ -107,5 +122,5 @@ MyData v ;
             Logger.getLogger(DashAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+  
 }

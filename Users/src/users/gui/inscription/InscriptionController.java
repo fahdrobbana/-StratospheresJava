@@ -7,6 +7,7 @@ package users.gui.inscription;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -118,16 +119,20 @@ public class InscriptionController implements Initializable {
     }
     
     @FXML
-    private void signup(ActionEvent event) throws IOException {
+    private void signup(ActionEvent event) throws IOException, SQLException {
         user_crud uc = new user_crud() ; 
         if(test())
         {
        uc.ajouter(new User(email.getText(),"",password.getText(),name.getText(),lastname.getText(),urlImg,false));
+       User u =  new User(email.getText(),"",password.getText(),name.getText(),lastname.getText(),urlImg,false);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
             alert.setContentText("user added !");
             alert.showAndWait();
+            
+            uc.sendMail(u, "Congrats you just create a new account !", "Congratulations");
+            
           try {
             Parent sv;
             sv = (AnchorPane) FXMLLoader.load(getClass().getResource("../login/login.fxml"));

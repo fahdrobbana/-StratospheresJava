@@ -46,6 +46,8 @@ public class ProfilAdminController implements Initializable {
     private Button showid1;
     @FXML
     private Circle c2;
+    @FXML
+    private Button blockid;
  
 
     /**
@@ -61,6 +63,13 @@ public class ProfilAdminController implements Initializable {
         lastname_id.setText(u.getName());
 Image imgcer = new Image(u.getImage(),false) ;
             c2.setFill(new ImagePattern(imgcer));
+            
+            if (u.isBlocked())
+                blockid.setText("Unblock");
+            else
+               blockid.setText("block");
+
+                
 
     }    
 
@@ -97,6 +106,33 @@ Image imgcer = new Image(u.getImage(),false) ;
         } catch (IOException ex) {
              Logger.getLogger(ProfilAdminController.class.getName()).log(Level.SEVERE, null, ex);
          }
+    }
+
+    @FXML
+    private void blockbtn(ActionEvent event) {
+            user_crud uc = new user_crud() ; 
+        User u = uc.getByID(DashAdminController.idprof);
+        System.out.println(u); 
+        System.out.println(u.isBlocked());
+        if (u.isBlocked())
+         { 
+             u.setBlocked(false);
+             uc.nomodifierblocker(u) ;  
+             blockid.setText("block");}
+
+            else
+         { u.setBlocked(true);
+          blockid.setText("Unblock");
+            uc.modifierblocker(u) ;  
+
+         }
+
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Success");
+            alert.setHeaderText(null);
+            alert.setContentText("User Blocked !");
+            alert.showAndWait();
+
     }
     
 }
