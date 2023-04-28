@@ -4,16 +4,17 @@ import java.util.Date;
 
 public class Reclamation {
 	    private int id_reclamation;
+	    private int idArticle;
 	    private String nom;
 	    private String commentaire;
 	    private String date;
 	    private String respond;
 	    private String email;
 
-    // Constructeur par défaut
+    // Constructeur par dï¿½faut
     public Reclamation() {}
 
-    // Constructeur avec paramètres
+    // Constructeur avec paramï¿½tres
     public Reclamation(int id_reclamation, String nom, String commentaire, String date, String respond, String email) {
         this.id_reclamation = id_reclamation;
         this.nom = nom;
@@ -22,8 +23,16 @@ public class Reclamation {
         this.respond = respond;
         this.email = email;
     }
+    
+    public int getIdArticle() {
+        return idArticle;
+    }
 
     // Getters et setters
+    public void setIdArticle(int idArticle) {    
+        this.idArticle = idArticle;
+    }
+
     public int getId_reclamation() {
         return id_reclamation;
     }
@@ -64,13 +73,14 @@ public class Reclamation {
         this.date = date;
     }
 
-    public Reclamation(String nom, String commentaire, String date, String respond, String email) {
+    public Reclamation(String nom, String commentaire, String date, String respond, String email,int idArticle) {
 		super();
 		this.nom = nom;
 		this.commentaire = commentaire;
 		this.date = date;
 		this.respond = respond;
 		this.email = email;
+		this.idArticle = idArticle;
 	}
 
 	public String getRespond() {
@@ -89,7 +99,7 @@ public class Reclamation {
         this.email = email;
     }
 
-    // Méthode toString pour afficher les informations de l'objet sous forme de chaîne de caractères
+    // Mï¿½thode toString pour afficher les informations de l'objet sous forme de chaï¿½ne de caractï¿½res
     @Override
     public String toString() {
         return "Reclamation [id_reclamation=" + id_reclamation + ", nom=" + nom + ", commentaire=" + commentaire

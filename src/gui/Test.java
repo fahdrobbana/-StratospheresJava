@@ -18,7 +18,7 @@ public class Test extends Application{
 	         
 	            Parent root= loader.load();
 	            Scene scene= new Scene(root);
-	            primaryStage.setTitle("Bievennue");
+	            primaryStage.setTitle("Bievenue");
 	            primaryStage.setScene(scene);
 	            primaryStage.show();
 	        

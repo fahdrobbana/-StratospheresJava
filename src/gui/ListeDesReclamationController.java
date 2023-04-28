@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import entities.Reclamation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +62,9 @@ public class ListeDesReclamationController implements Initializable{
     @FXML
     private Button btn11;
     
+    @FXML
+    private TextField recherche;
+    
     
 
     
@@ -76,9 +81,6 @@ public class ListeDesReclamationController implements Initializable{
         nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         commentaire.setCellValueFactory(new PropertyValueFactory<>("commentaire"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
-     
-       
-
         respond.setCellValueFactory(new PropertyValueFactory<>("respond"));
         emailcolumn.setCellValueFactory(new PropertyValueFactory<>("email"));
  
@@ -101,6 +103,31 @@ public class ListeDesReclamationController implements Initializable{
 
     }
 
-   
-}
+   public void search() {
+        FilteredList<Reclamation> filteredList;
+        filteredList = new FilteredList<>(listeB, (e -> true));
+        recherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredList.setPredicate(predicateRec -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String searchKey = newValue.toLowerCase();
+                if (predicateRec.getNom().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateRec.getCommentaire().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateRec.getRespond().toLowerCase().contains(searchKey)) {
+                    return true;
+                } else if (predicateRec.getEmail().toLowerCase().contains(searchKey)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+        SortedList<Reclamation> sortList = new SortedList<>(filteredList);
+        sortList.comparatorProperty().bind(table.comparatorProperty());
+        table.setItems(sortList);
+    }
 
+
+}

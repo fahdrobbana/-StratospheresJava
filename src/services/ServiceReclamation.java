@@ -13,123 +13,149 @@ import utils.*;
 
 public class ServiceReclamation implements IServiceReclamation<Reclamation> {
 
-	private Connection cnx = DataSource.getInstance().getConnection();
+    private Connection cnx = DataSource.getInstance().getConnection();
 
-	// Méthode pour ajouter une nouvelle réclamation à la base de données
-	public void ajouter(Reclamation reclamation) {
-		try {
-			// Créer une requête SQL pour ajouter une réclamation
-			String query = "INSERT INTO reclamations (nom,commentaire,date,respond, email) VALUES (?, ?,?,?,?)";
-			System.out.println(reclamation.toString());
+    // Mï¿½thode pour ajouter une nouvelle rï¿½clamation ï¿½ la base de donnï¿½es
+    public void ajouter(Reclamation reclamation) {
+        try {
+            // Crï¿½er une requï¿½te SQL pour ajouter une rï¿½clamation
+            String query = "INSERT INTO reclamations (nom,commentaire,date,respond, email,idArticle) VALUES (?, ?,?,?,?,?)";
+            System.out.println(reclamation.toString());
 
-			PreparedStatement statement = cnx.prepareStatement(query);
-			statement.setString(1, reclamation.getNom());
-			statement.setString(2, reclamation.getCommentaire());
-			statement.setString(3, reclamation.getDate());
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setString(1, reclamation.getNom());
+            statement.setString(2, reclamation.getCommentaire());
+            statement.setString(3, reclamation.getDate());
 
-			statement.setString(4, reclamation.getRespond());
-			statement.setString(5, reclamation.getEmail());
-			statement.executeUpdate();
-			System.out.println("Reclamation ajouter avec success !");
+            statement.setString(4, reclamation.getRespond());
+            statement.setString(5, reclamation.getEmail());
+            statement.setInt(6, reclamation.getIdArticle());
+            statement.executeUpdate();
+            System.out.println("Reclamation ajouter avec success !");
 
-			// Exécuter la requête SQL
+            // Exï¿½cuter la requï¿½te SQL
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    // Mï¿½thode pour supprimer une rï¿½clamation de la base de donnï¿½es en utilisant son
+    // nom
+    public void supprimer(int id) {
+        try {
+            // Crï¿½er une requï¿½te SQL pour supprimer une rï¿½clamation en utilisant son nom
+            String query = "DELETE FROM reclamations WHERE id_reclamation = ?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setInt(1, id);
 
-	// Méthode pour supprimer une réclamation de la base de données en utilisant son
-	// nom
-	public void supprimer(int id) {
-		try {
-			// Créer une requête SQL pour supprimer une réclamation en utilisant son nom
-			String query = "DELETE FROM reclamations WHERE id_reclamation = ?";
-			PreparedStatement statement = cnx.prepareStatement(query);
-			statement.setInt(1, id);
+            // Exï¿½cuter la requï¿½te SQL
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-			// Exécuter la requête SQL
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    // Mï¿½thode pour modifier une rï¿½clamation de la base de donnï¿½es en utilisant son
+    // nom
+    public void modifier(String nom, int id) {
+        try {
+            // Crï¿½er une requï¿½te SQL pour modifier une rï¿½clamation en utilisant son nom
+            String query = "UPDATE reclamations SET respond = ?  WHERE id_reclamation = ?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setString(1, nom);
+            statement.setInt(2, id);
 
-	// Méthode pour modifier une réclamation de la base de données en utilisant son
-	// nom
-	public void modifier(String nom,int id) {
-		try {
-			// Créer une requête SQL pour modifier une réclamation en utilisant son nom
-			String query = "UPDATE reclamations SET respond = ?  WHERE id_reclamation = ?";
-			PreparedStatement statement = cnx.prepareStatement(query);
-			statement.setString(1,nom);
-			statement.setInt(2, id);
-		 
-			System.out.println("Reclamation ajouté avec succès !");
-			// Exécuter la requête SQL
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            System.out.println("Reclamation ajoutï¿½ avec succï¿½s !");
+            // Exï¿½cuter la requï¿½te SQL
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	// Méthode pour afficher toutes les réclamations stockées dans la base de
-	// données
-	public ObservableList<Reclamation> afficherTous() {
-		ObservableList<Reclamation> reclamations = FXCollections.observableArrayList();
-		try {
-			// Créer une requête SQL pour récupérer toutes les réclamations
-			String query = "SELECT * FROM reclamations";
-			Statement statement = cnx.createStatement();
+    // Mï¿½thode pour afficher toutes les rï¿½clamations stockï¿½es dans la base de
+    // donnï¿½es
+    public ObservableList<Reclamation> afficherTous() {
+        ObservableList<Reclamation> reclamations = FXCollections.observableArrayList();
+        try {
+            // Crï¿½er une requï¿½te SQL pour rï¿½cupï¿½rer toutes les rï¿½clamations
+            String query = "SELECT * FROM reclamations";
+            Statement statement = cnx.createStatement();
 
-			// Exécut
-			// Exécuter la requête SQL et récupérer les résultats
-			ResultSet resultSet = statement.executeQuery(query);
+            // Exï¿½cut
+            // Exï¿½cuter la requï¿½te SQL et rï¿½cupï¿½rer les rï¿½sultats
+            ResultSet resultSet = statement.executeQuery(query);
 
-			// Parcourir les résultats et créer des objets Reclamation pour chaque ligne
-			while (resultSet.next()) {
-				int id = resultSet.getInt("id_reclamation");
-				String nom = resultSet.getString("nom");
-				String commentaire = resultSet.getString("commentaire");
-				String date = resultSet.getString("date");
-				String respond = resultSet.getString("respond");
-				String email = resultSet.getString("email");
-				Reclamation reclamation = new Reclamation(id, nom, commentaire, date, respond, email);
-				reclamations.add(reclamation);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return reclamations;
-	}
+            // Parcourir les rï¿½sultats et crï¿½er des objets Reclamation pour chaque ligne
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_reclamation");
+                String nom = resultSet.getString("nom");
+                String commentaire = resultSet.getString("commentaire");
+                String date = resultSet.getString("date");
+                String respond = resultSet.getString("respond");
+                String email = resultSet.getString("email");
+                Reclamation reclamation = new Reclamation(id, nom, commentaire, date, respond, email);
+                reclamations.add(reclamation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamations;
+    }
 
-	// Méthode pour rechercher une réclamation dans la base de données en utilisant
-	// son identifiant
-	public Reclamation rechercherReclamationParId(int id) {
-		try {
-			// Créer une requête SQL pour récupérer une réclamation en utilisant son
-			// identifiant
-			String query = "SELECT * FROM reclamations WHERE id_reclamation = ?";
-			PreparedStatement statement = cnx.prepareStatement(query);
-			statement.setInt(1, id);
+    // Mï¿½thode pour rechercher une rï¿½clamation dans la base de donnï¿½es en utilisant
+    // son identifiant
+    public Reclamation rechercherReclamationParId(int id) {
+        try {
+            // Crï¿½er une requï¿½te SQL pour rï¿½cupï¿½rer une rï¿½clamation en utilisant son
+            // identifiant
+            String query = "SELECT * FROM reclamations WHERE id_reclamation = ?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setInt(1, id);
 
-			// Exécuter la requête SQL et récupérer le résultat
-			ResultSet resultSet = statement.executeQuery();
+            // Exï¿½cuter la requï¿½te SQL et rï¿½cupï¿½rer le rï¿½sultat
+            ResultSet resultSet = statement.executeQuery();
 
-			// Si la requête a retourné un résultat, créer un objet Reclamation avec les
-			// données et le retourner
-			if (resultSet.next()) {
-				String nom = resultSet.getString("nom");
-				String commentaire = resultSet.getString("commentaire");
-				String date = resultSet.getString("date");
-				String respond = resultSet.getString("respond");
-				String email = resultSet.getString("email");
-				Reclamation reclamation = new Reclamation(id, nom, commentaire, date, respond, email);
-				return reclamation;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+            // Si la requï¿½te a retournï¿½ un rï¿½sultat, crï¿½er un objet Reclamation avec les
+            // donnï¿½es et le retourner
+            if (resultSet.next()) {
+                String nom = resultSet.getString("nom");
+                String commentaire = resultSet.getString("commentaire");
+                String date = resultSet.getString("date");
+                String respond = resultSet.getString("respond");
+                String email = resultSet.getString("email");
+                Reclamation reclamation = new Reclamation(id, nom, commentaire, date, respond, email);
+                return reclamation;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int countRecArt(int art_id) {
+        int count = 0;
+       try {
+            
+            String query = "SELECT COUNT(*) FROM reclamations WHERE idArticle = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            stmt.setInt(1, art_id);
+
+            // ExÃ©cuter la requÃªte SQL
+            ResultSet rs = stmt.executeQuery();
+
+            // RÃ©cupÃ©rer le nombre de lignes
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+            // Fermer les ressources
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
 }

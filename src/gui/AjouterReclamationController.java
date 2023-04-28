@@ -50,7 +50,7 @@ public class AjouterReclamationController implements Initializable {
     }
     
 
-    @FXML
+    @FXML 
     private DatePicker date_rep;
     @FXML
     private TextField email;
@@ -77,6 +77,8 @@ public class AjouterReclamationController implements Initializable {
             alert.showAndWait();
         }else if (!isValidEmail(email.getText())) {
             // Affichage d'une alerte en cas de saisie d'email invalide
+            
+            
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur de saisie");
             alert.setHeaderText(null);
@@ -89,17 +91,17 @@ public class AjouterReclamationController implements Initializable {
             String nom1 =nom.getText();
             String mail = email.getText();
             ServiceReclamation b = new ServiceReclamation();
-            Reclamation r1 = new Reclamation(nom1, message1,dater,message2,mail);
+            Reclamation r1 = new Reclamation(nom1, message1,dater,message2,mail,UserInterfaceController.idArt);
             b.ajouter(r1);
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
-            alert.setContentText("La reclamation est avec succes");
+            alert.setContentText("La reclamation est ajoutÃ©e avec succes");
             alert.showAndWait();
             Alert alert2 = new Alert(AlertType.CONFIRMATION);
 			alert2.setTitle("Information Dialog");
 			alert2.setHeaderText(null);
-			alert2.setContentText("reponse insérée avec succès!");
+			alert2.setContentText("reponse insï¿½rï¿½e avec succï¿½s!");
 /*
 			Optional<ButtonType> result = alert2.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {

@@ -6,14 +6,14 @@ public class Article {
     private String image;
     private String description;
 
-    // Constructeur par défaut
+    // Constructeur par dï¿½faut
     public Article() {}
 
-    // Constructeur avec paramètres
-    public Article(int id_article, String type, int id_reclamation, String image, String description) {
+    // Constructeur avec paramï¿½tres
+    public Article(int id_article, String type, String image, String description) {
         this.id_article = id_article;
         this.type = type;
-        this.id_reclamation = id_reclamation;
+    
         this.image = image;
         this.description = description;
     }
@@ -26,7 +26,7 @@ public class Article {
     public Article(String type, int id_reclamation, String image, String description) {
 		super();
 		this.type = type;
-		this.id_reclamation = id_reclamation;
+		
 		this.image = image;
 		this.description = description;
 	}
@@ -67,7 +67,7 @@ public class Article {
         this.description = description;
     }
 
-    // Méthode toString pour afficher les informations de l'objet sous forme de chaîne de caractères
+    // Mï¿½thode toString pour afficher les informations de l'objet sous forme de chaï¿½ne de caractï¿½res
     @Override
     public String toString() {
         return "Article [id_article=" + id_article + ", type=" + type + ", id_reclamation=" + id_reclamation

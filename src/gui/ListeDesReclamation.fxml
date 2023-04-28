@@ -16,9 +16,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<AnchorPane id="AnchorPane" prefHeight="588.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListeDesReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="581.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ListeDesReclamationController">
    <children>
-       <TableView fx:id="table" layoutX="-1.0" prefHeight="595.0" prefWidth="792.0">
+       <TableView fx:id="table" layoutX="14.0" layoutY="76.0" prefHeight="519.0" prefWidth="792.0">
         <columns>
           <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
            <TableColumn fx:id="commentaire" prefWidth="75.0" text="Commentaire" />
@@ -31,5 +31,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <TextField fx:id="recherche" layoutX="34.0" layoutY="25.0" onKeyTyped="#search" prefHeight="31.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 /**
@@ -22,9 +23,8 @@ import javafx.stage.Stage;
   */
 public class AcceuilAdminController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+  @FXML
+    private Button statBtn;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -77,6 +77,24 @@ public class AcceuilAdminController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    
+}
+        public void showStat( ) {
+            try {
+                // Load the Modif.fxml file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("StatFXML.fxml"));
+                Parent root = loader.load();
+
+                // Show the Modif.fxml interface
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+                statBtn.getScene().getWindow().hide();
 
             } catch (IOException e) {
                 e.printStackTrace();

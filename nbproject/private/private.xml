@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AjouterArticleController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/entities/Reclamation.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/utils/DataSource.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/UserInterfaceController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/StatFXML.fxml</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/services/ServiceArticle.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/statfxml.css</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/test/TestArticle.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AcceuilController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/services/IServiceArticle.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/ListeDesReclamationController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/services/IServiceReclamation.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/Test.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AcceuilAdminController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/StatFXMLController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AjouterReclamationController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/ModifierReclamationController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AcceuilAdmin.fxml</file>
+        </group>
+    </open-files>
+</project-private>

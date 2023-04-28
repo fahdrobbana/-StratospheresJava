@@ -20,36 +20,36 @@ public class ServiceArticle implements IServiceArticle<Article> {
 
 	private Connection cnx = DataSource.getInstance().getConnection();
 
-	// Méthode pour ajouter un nouvel article à la base de données
+	// Mï¿½thode pour ajouter un nouvel article ï¿½ la base de donnï¿½es
 	public void ajouter(Article article) {
 		try {
-			String requete = "INSERT INTO article (type, id_reclamation, image, description) VALUES (?, ?, ?, ?)";
+			String requete = "INSERT INTO article (type, image, description) VALUES ( ?, ?, ?)";
 			PreparedStatement pst = cnx.prepareStatement(requete);
 			pst.setString(1, article.getType());
-			pst.setInt(2, article.getId_reclamation());
-			pst.setString(3, article.getImage());
-			pst.setString(4, article.getDescription());
+			
+			pst.setString(2, article.getImage());
+			pst.setString(3, article.getDescription());
 			pst.executeUpdate();
-			System.out.println("Article ajouté avec succès !");
+			System.out.println("Article ajoutï¿½ avec succï¿½s !");
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
 		}
 	}
 
-	// Méthode pour supprimer un article de la base de données en utilisant son type
+	// Mï¿½thode pour supprimer un article de la base de donnï¿½es en utilisant son type
 	public void supprimer(int id) {
 		try {
 			String requete = "DELETE FROM article WHERE id_article = ?";
 			PreparedStatement pst = cnx.prepareStatement(requete);
 			pst.setInt(1, id);
 			pst.executeUpdate();
-			System.out.println("Article supprimé avec succès !");
+			System.out.println("Article supprimï¿½ avec succï¿½s !");
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
 		}
 	}
 
-	// Méthode pour modifier un article de la base de données en utilisant son type
+	// Mï¿½thode pour modifier un article de la base de donnï¿½es en utilisant son type
 	public void modifier(String type, int id) {
 		try {
 			String requete = "UPDATE article SET type = ?  WHERE id_article = ?";
@@ -59,13 +59,13 @@ public class ServiceArticle implements IServiceArticle<Article> {
 			pst.setInt(2, id);
 
 			pst.executeUpdate();
-			System.out.println("Article modifié avec succès !");
+			System.out.println("Article modifiï¿½ avec succï¿½s !");
 		} catch (SQLException ex) {
 			System.err.println(ex.getMessage());
 		}
 	}
 
-	// Méthode pour afficher tous les articles stockés dans la base de données
+	// Mï¿½thode pour afficher tous les articles stockï¿½s dans la base de donnï¿½es
 	public ObservableList<Article> afficherTous() {
 		ObservableList<Article> articles = FXCollections.observableArrayList();
 		;
@@ -77,7 +77,7 @@ public class ServiceArticle implements IServiceArticle<Article> {
 				Article article = new Article();
 				article.setId_article(rs.getInt("id_article"));
 				article.setType(rs.getString("type"));
-				article.setId_reclamation(rs.getInt("id_reclamation"));
+//				article.setId_reclamation(rs.getInt("id_reclamation"));
 				article.setImage(rs.getString("image"));
 				article.setDescription(rs.getString("description"));
 				articles.add(article);
@@ -88,7 +88,7 @@ public class ServiceArticle implements IServiceArticle<Article> {
 		return articles;
 	}
 
-	// Méthode pour rechercher un article dans la base de données en utilisant son
+	// Mï¿½thode pour rechercher un article dans la base de donnï¿½es en utilisant son
 	// identifiant
 	public Article rechercherArticleParId(int id) {
 		Article article = null;

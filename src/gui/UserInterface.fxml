@@ -25,11 +25,12 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <Label prefHeight="63.0" prefWidth="369.0" text="Welcome User1">
+            <Label prefHeight="63.0" prefWidth="369.0" text="Welcome User">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
+            <Button mnemonicParsing="false" onAction="#generatePDF" prefHeight="31.0" prefWidth="105.0" text="pdf" />
             <ImageView fitHeight="64.0" fitWidth="205.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@user.png" />
@@ -41,7 +42,7 @@
         <columns>
              <TableColumn fx:id="liencolumn" prefWidth="75.0" text="Type" />
             <TableColumn fx:id="desccolumn" prefWidth="75.0" text="Description" />
-                <TableColumn fx:id="imagecolumn" prefWidth="176.0" text="Logo" />
+                <TableColumn fx:id="imagecolumn" prefWidth="176.0" text="image" />
        
         </columns>
          <columnResizePolicy>

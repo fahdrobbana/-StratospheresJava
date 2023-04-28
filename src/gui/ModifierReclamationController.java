@@ -4,6 +4,7 @@
  */
 package gui;
 
+import com.sun.mail.smtp.SMTPTransport;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,6 +14,8 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -27,6 +30,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.StringConverter;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import services.ServiceReclamation;
 
 public class ModifierReclamationController implements Initializable {
@@ -90,13 +97,48 @@ public class ModifierReclamationController implements Initializable {
 
         
         b.modifier(message1,comboBoxReclamation.getSelectionModel().getSelectedItem().getId_reclamation()); 
+       Reclamation c =b. rechercherReclamationParId(comboBoxReclamation.getSelectionModel().getSelectedItem().getId_reclamation());
+       sendMail(message1,c.getEmail());
          Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information Dialog");
         alert.setHeaderText(null);
-        alert.setContentText("Reclamation modifier avec succès!");
+        alert.setContentText("Reclamation modifier avec succï¿½s!");
         alert.showAndWait();
     	}
         
     }
+public void sendMail(String reponse, String email) {
+        try {
 
+            Properties props = new Properties();
+            props.put("mail.transport.protocol", "smtp"); //SMTP protocol
+            props.put("mail.smtps.host", "smtp.gmail.com"); //SMTP Host
+            props.put("mail.smtps.auth", "true"); //enable authentication
+
+            Session session = Session.getInstance(props, null);
+
+       
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.setFrom(new InternetAddress("Reclamation Reponse <monEmail@domaine.com>"));
+            msg.setRecipients(Message.RecipientType.TO, email);
+            msg.setSubject("Body Rock  : Reset Password ");
+            msg.setSentDate(new Date(System.currentTimeMillis()));
+
+            String txt = "voici notre reponse pour votre reclamation: \n " + reponse ;
+
+            msg.setText(txt);
+
+            SMTPTransport st = (SMTPTransport) session.getTransport("smtps");
+
+            st.connect("smtp.gmail.com", 465, "zeddini.mohameddhia@esprit.tn", "201JMT2979");
+
+            st.sendMessage(msg, msg.getAllRecipients());
+
+            System.out.println("server response : " + st.getLastServerResponse());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
