@@ -248,21 +248,6 @@ datefincb.setValue(d1);
          GotoFXML("participation", "Participation", event);
     }
 
-    private void statistique(ActionEvent event) {
-         Stage stageclose=(Stage)((Node)event.getSource()).getScene().getWindow();
-        stageclose.close();
-        try {
-            Parent root=FXMLLoader.load(getClass().getResource("/vues/statevenement.fxml"));
-            Scene scene = new Scene(root);
-            Stage primaryStage=new Stage();
-            primaryStage.setTitle("Evenement!");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(Pidev3A31.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     @FXML
     private void SearchEvent(KeyEvent event) {
          String search = tfrecherche.getText();

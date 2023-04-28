@@ -106,8 +106,7 @@ public class ParticipationController implements Initializable {
     private ImageView bqckbtn;
 
     private TableColumn<?, ?> colidevent;
-    @FXML
-    private Label UserName;
+
     @FXML
     private Button pdf;
    @FXML
@@ -137,6 +136,9 @@ public class ParticipationController implements Initializable {
         this.nomevent = ev.GetNamesEvent();
         cbev.setItems(nomevent);
         updateTableEvent();
+        tfrecherche.textProperty().addListener((observable, oldValue, newValue) -> {
+            rechercherEvent();
+        });
        
     }
 
@@ -176,7 +178,7 @@ public class ParticipationController implements Initializable {
 
     }
 
-    private boolean validateFields() {
+   private boolean validateFields() {
         String nom = tfnom.getText();
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
@@ -201,7 +203,9 @@ public class ParticipationController implements Initializable {
 
         if (email.isEmpty()) {
             showAlert("Email est vide");
+             System.out.println("here");
             return false;
+           
         }
          if (num_tel==0) {
             showAlert("Numero est vide");
@@ -215,6 +219,7 @@ public class ParticipationController implements Initializable {
 
         return true;
     }
+
 
     private void showAlert(String message) {
         // Créer un boîte de dialogue d'alerte
@@ -257,7 +262,6 @@ public class ParticipationController implements Initializable {
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
          int num_tel = Integer.valueOf(tfnum.getText());
-
         String nomEV = cbev.getSelectionModel().getSelectedItem();
         int event_id = ev.GetIdEvent(nomEV);
         System.out.println(event_id);
@@ -290,7 +294,7 @@ public class ParticipationController implements Initializable {
 
     @FXML
     private void Pdf(ActionEvent event) {
-        String path = "";
+   String path = "";
         JFileChooser j = new JFileChooser();
         j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         int x = j.showSaveDialog(null);
@@ -401,7 +405,7 @@ public class ParticipationController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    
     }
     
      
@@ -457,4 +461,22 @@ public class ParticipationController implements Initializable {
             .collect(Collectors.toList()));
     tableevent.setItems(Events);
     }
+    public void rechercherEvent() {
+        String keyword = tfrecherche.getText();
+        ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+        ObservableList<TableColumn<Evenement, ?>> columns = tableevent.getColumns();
+        for (int i = 0; i <ev.readEvent().size(); i++) {
+            Evenement event = ev.readEvent().get(i);
+            for (int j = 0; j < columns.size(); j++) {
+                TableColumn<Evenement, ?> column = columns.get(j);
+                String cellValue = column.getCellData(event).toString();
+                if (cellValue.contains(keyword)) {
+                    filteredList.add(event);
+                    break;
+                }
+            }
+        }
+        tableevent.setItems(filteredList);
+    }
+
 }

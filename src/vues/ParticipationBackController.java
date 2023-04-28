@@ -317,11 +317,11 @@ public class ParticipationBackController implements Initializable {
             logo.scaleAbsolute(logoWidth, logoHeight);
             doc.add(logo);
 
-            PdfPTable table = new PdfPTable(5); // Modification du nombre de colonnes
+            PdfPTable table = new PdfPTable(6); // Modification du nombre de colonnes
             table.setWidthPercentage(100);
             table.setSpacingBefore(20f);
             table.setSpacingAfter(20f);
-            float[] columnWidths = {2f, 2f, 3f, 3f, 2f};
+            float[] columnWidths = {2f, 2f, 3f, 3f, 2f,3f};
             table.setWidths(columnWidths);
 
             // Ajout de couleurs de fond et de police différente pour l'en-tête de table

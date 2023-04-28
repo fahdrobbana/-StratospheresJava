@@ -16,7 +16,7 @@ import com.twilio.type.PhoneNumber;
 public class EnvoyerSMS {
      // Vos identifiants Twilio
             private static final String ACCOUNT_SID = "AC91ce07546c98d7ef7de4f4d065364139";
-            private static final String AUTH_TOKEN = "1c65aea838ffe1d5f3512a431573c97f";
+            private static final String AUTH_TOKEN = "dca9092bf1335574b92c60d66fad9be8";
 
             // Numéro de téléphone Twilio
             private static final String TWILIO_PHONE_NUMBER = "+15675220383";
