@@ -55,11 +55,7 @@ import javafx.util.Callback;
 import services.ServiceArticle;
 import javafx.scene.image.ImageView;
 
-/**
- * FXML Controller class
- *
- * @author ILYESS LASS
- */
+
 public class UserInterfaceController implements Initializable {
 
     public static int idArt;

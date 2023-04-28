@@ -8,6 +8,8 @@
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/utils/DataSource.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/UserInterfaceController.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/StatFXML.fxml</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/admin.jpg</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/images%20(1).jpg.png</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/services/ServiceArticle.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/statfxml.css</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/test/TestArticle.java</file>
@@ -19,7 +21,10 @@
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/Test.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AcceuilAdminController.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/StatFXMLController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/pi_dev/Pi_Dev.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AjouterReclamationController.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/entities/Article.java</file>
+            <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/test/TestReclamation.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/ModifierReclamationController.java</file>
             <file>file:/C:/Users/farah/Downloads/Pi_Dev/Pi_Dev/src/gui/AcceuilAdmin.fxml</file>
         </group>

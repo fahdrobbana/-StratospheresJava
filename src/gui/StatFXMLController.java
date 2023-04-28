@@ -25,11 +25,7 @@ import javafx.scene.layout.BorderPane;
 import services.ServiceArticle;
 import services.ServiceReclamation;
 
-/**
- * FXML Controller class
- *
- * @author PersoPc
- */
+
 public class StatFXMLController implements Initializable {
 
     @FXML
