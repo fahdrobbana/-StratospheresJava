@@ -27,6 +27,12 @@ import users.entity.User;
 import users.gui.admin.DashAdminController;
 import users.services.user_crud;
 
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+
 /**
  * FXML Controller class
  *
@@ -42,6 +48,7 @@ public class LoginController implements Initializable {
     private PasswordField Password_id;
     @FXML
     private AnchorPane pane;
+    String message = "You're Logged In!";
 
     /**
      * Initializes the controller class.
@@ -69,6 +76,7 @@ public class LoginController implements Initializable {
         }
         if(userc!=0)
         {
+            notifyUser(message);
             FXMLLoader loader2 = new FXMLLoader(getClass().getResource("../profil/profil.fxml"));
                     Parent root2 = loader2.load();
 
@@ -112,5 +120,26 @@ public class LoginController implements Initializable {
         }
     }
     
-    
+    private void notifyUser(String message) {
+         if (SystemTray.isSupported()) {
+             try {
+                 // Initialiser SystemTray
+                 SystemTray tray = SystemTray.getSystemTray();
+
+                 // Créer une icône pour la notification
+                 Image image = Toolkit.getDefaultToolkit().createImage("icon.png");
+                 TrayIcon trayIcon = new TrayIcon(image, "Notification");
+
+                 // Ajouter l'icône au SystemTray
+                 tray.add(trayIcon);
+
+                 // Afficher la notification
+                 trayIcon.displayMessage("Notification", message, TrayIcon.MessageType.INFO);
+             } catch (AWTException e) {
+                 System.err.println("Erreur lors de l'initialisation du SystemTray: " + e);
+             }
+         } else {
+             System.out.println("SystemTray n'est pas pris en charge");
+         }
+     }
 }
