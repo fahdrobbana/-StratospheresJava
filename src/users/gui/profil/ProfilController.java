@@ -115,5 +115,18 @@ Image imgcer = new Image(u.getImage(),false) ;
              Logger.getLogger(ProfilController.class.getName()).log(Level.SEVERE, null, ex);
          }
     }
+
+    @FXML
+    private void Annonce(ActionEvent event) {
+                          try
+        {
+            Parent sv ;
+            sv = (AnchorPane)FXMLLoader.load(getClass().getResource("../Menu.fxml"));
+          pane.getChildren().removeAll() ; 
+          pane.getChildren().setAll(sv) ;                              
+        } catch (IOException ex) {
+             Logger.getLogger(ProfilController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }
     
 }
