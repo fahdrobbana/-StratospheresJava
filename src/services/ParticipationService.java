@@ -36,7 +36,7 @@ public class ParticipationService {
 
     public boolean ajouterParticipation(Participation p) {
 
-        String req = "insert into participation (nom,prenom,adresse,email,num_tel,event_id) values (?,?,?,?,?,?)";
+        String req = "insert into participation (nom,prenom,adresse,email,numero,event_id) values (?,?,?,?,?,?)";
         if (checkfull(p.getEvent_id())) {
             try {
                 pst = conn.prepareStatement(req);
@@ -45,7 +45,7 @@ public class ParticipationService {
                 pst.setString(2, p.getPrenom());
                 pst.setString(3, p.getAdresse());
                 pst.setString(4, p.getEmail());
-                pst.setInt(5, p.getNum_tel());
+                pst.setInt(5, p.getNumero());
                 pst.setInt(6, p.getEvent_id());
                 pst.executeUpdate();
               
@@ -113,7 +113,7 @@ public class ParticipationService {
             ste = conn.createStatement();
             rs = ste.executeQuery(req);
             while (rs.next()) {//parcourir le resultset
-                list.add(new Participation(rs.getInt("id"), rs.getInt("event_id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("email"), rs.getInt("num_tel")));
+                list.add(new Participation(rs.getInt("id"), rs.getInt("event_id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("adresse"), rs.getString("email"), rs.getInt("numero")));
             }
 
         } catch (SQLException ex) {
@@ -124,7 +124,7 @@ public class ParticipationService {
     }
 
     public void modifierParticipationPst(Participation p) {
-        String req = "update participation set nom= ?,  prenom= ?, adresse= ?, email= ?,num_tel= ?, event_id= ? where id = ?";
+        String req = "update participation set nom= ?,  prenom= ?, adresse= ?, email= ?,numero= ?, event_id= ? where id = ?";
 
         try {
             pst = conn.prepareStatement(req);
@@ -132,7 +132,7 @@ public class ParticipationService {
             pst.setString(2, p.getPrenom());
             pst.setString(3, p.getAdresse());
             pst.setString(4, p.getEmail());
-             pst.setInt(5, p.getNum_tel());
+             pst.setInt(5, p.getNumero());
             pst.setInt(6, p.getEvent_id());
             pst.setInt(7, p.getId());
             pst.executeUpdate();

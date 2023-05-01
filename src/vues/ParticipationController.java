@@ -130,6 +130,8 @@ public class ParticipationController implements Initializable {
     private TextField tfnum;
     @FXML
     private Button btntri;
+    @FXML
+    private Label UserName;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -183,7 +185,7 @@ public class ParticipationController implements Initializable {
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
-         int num_tel = Integer.valueOf(tfnum.getText());
+         int numero = Integer.valueOf(tfnum.getText());
         String nomEV = cbev.getSelectionModel().getSelectedItem();
 
         if (nom.isEmpty()) {
@@ -207,7 +209,7 @@ public class ParticipationController implements Initializable {
             return false;
            
         }
-         if (num_tel==0) {
+         if (numero==0) {
             showAlert("Numero est vide");
             return false;
         }
@@ -250,7 +252,7 @@ public class ParticipationController implements Initializable {
 
     @FXML
     private void backbtnmenu(MouseEvent event) {
-        GotoFXML("participationback", "ParticipationBack", event);
+        GotoFXML("participationback", "Gestion Participation", event);
     }
 
 
@@ -261,13 +263,13 @@ public class ParticipationController implements Initializable {
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
-         int num_tel = Integer.valueOf(tfnum.getText());
+         int numero = Integer.valueOf(tfnum.getText());
         String nomEV = cbev.getSelectionModel().getSelectedItem();
         int event_id = ev.GetIdEvent(nomEV);
         System.out.println(event_id);
 
-        Participation r = new Participation(event_id, nom, prenom, adresse, email,num_tel);
-        if (nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || email.isEmpty()||num_tel==0) {
+        Participation r = new Participation(event_id, nom, prenom, adresse, email,numero);
+        if (nom.isEmpty() || prenom.isEmpty() || adresse.isEmpty() || email.isEmpty()||numero==0) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erreur de saisie");
             alert.setHeaderText(null);
@@ -292,121 +294,7 @@ public class ParticipationController implements Initializable {
 
    
 
-    @FXML
-    private void Pdf(ActionEvent event) {
-   String path = "";
-        JFileChooser j = new JFileChooser();
-        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int x = j.showSaveDialog(null);
-        if (x == JFileChooser.APPROVE_OPTION) {
-            path = j.getSelectedFile().getPath();
-        }
-
-        Document doc = new Document(PageSize.A4, 50, 50, 50, 50);
-        try {
-            PdfWriter.getInstance(doc, new FileOutputStream(path + "/Participation.pdf"));
-            doc.open();
-
-            // Ajout du titre
-            doc.add(new Paragraph("  "));
-            doc.add(new Paragraph("  "));
-            Paragraph title = new Paragraph("Liste des Participations", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.DARK_GRAY));
-            title.setAlignment(Element.ALIGN_CENTER);
-            doc.add(title);
-
-            // Ajout de la date de création
-            LocalDate currentDate = LocalDate.now();
-            Paragraph date = new Paragraph("Date: " + currentDate.toString(), FontFactory.getFont(FontFactory.HELVETICA, 10, new BaseColor(0, 0, 255)));
-            date.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(date);
-
-            // Ajout du logo
-            String imagePath = getClass().getResource("/ressources/gfllogo.png").getPath();
-            Image logo = Image.getInstance(imagePath);
-            float pageWidth = doc.getPageSize().getWidth();
-            float logoWidth = 250; // Largeur du logo en pixels
-            float logoHeight = 100; // Hauteur du logo en pixels
-            float logoX = (pageWidth - logoWidth) / 2; // Position horizontale du logo
-            float logoY = doc.getPageSize().getHeight() - 100; // Position verticale du logo (au-dessus du contenu)
-            logo.setAbsolutePosition(logoX, logoY);
-            logo.scaleAbsolute(logoWidth, logoHeight);
-            doc.add(logo);
-
-            PdfPTable table = new PdfPTable(5); // Modification du nombre de colonnes
-            table.setWidthPercentage(100);
-            table.setSpacingBefore(20f);
-            table.setSpacingAfter(20f);
-            float[] columnWidths = {2f, 2f, 3f, 3f, 2f};
-            table.setWidths(columnWidths);
-
-            // Ajout de couleurs de fond et de police différente pour l'en-tête de table
-            PdfPCell headerCell = new PdfPCell();
-            headerCell.setBackgroundColor(BaseColor.GREEN);
-            headerCell.setPadding(5);
-            headerCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            headerCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.WHITE);
-            headerCell.setPhrase(new Phrase("Nom", headerFont));
-            table.addCell(headerCell);
-
-            headerCell.setPhrase(new Phrase("Prénom", headerFont));
-            table.addCell(headerCell);
-
-            headerCell.setPhrase(new Phrase("Adresse", headerFont));
-            table.addCell(headerCell);
-
-            headerCell.setPhrase(new Phrase("Email", headerFont));
-            table.addCell(headerCell);
-            
-             headerCell.setPhrase(new Phrase("Numero", headerFont));
-            table.addCell(headerCell);
-
-            headerCell.setPhrase(new Phrase("ID événement", headerFont));
-            table.addCell(headerCell);
-
-            ParticipationService p = new ParticipationService();
-            for (int i = 0; i < p.rowPartic(); i++) {
-
-                String nom = tablepartic.getColumns().get(0).getCellObservableValue(i).getValue().toString();
-                String prenom = tablepartic.getColumns().get(1).getCellObservableValue(i).getValue().toString();
-                String adresse = tablepartic.getColumns().get(2).getCellObservableValue(i).getValue().toString();
-                String email = tablepartic.getColumns().get(3).getCellObservableValue(i).getValue().toString();
-                  String num_tel = tablepartic.getColumns().get(4).getCellObservableValue(i).getValue().toString();
-                String event_id = tablepartic.getColumns().get(5).getCellObservableValue(i).getValue().toString();
-
-                // Ajout de couleurs de fond et de police différente pour les cellules de données
-                PdfPCell dataCell = new PdfPCell();
-                dataCell.setPadding(5);
-                dataCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-                dataCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-                Font dataFont = FontFactory.getFont(FontFactory.HELVETICA, 10, BaseColor.DARK_GRAY);
-                dataCell.setPhrase(new Phrase(nom, dataFont));
-                table.addCell(dataCell);
-
-                dataCell.setPhrase(new Phrase(prenom, dataFont));
-                table.addCell(dataCell);
-
-                dataCell.setPhrase(new Phrase(adresse, dataFont));
-                table.addCell(dataCell);
-
-                dataCell.setPhrase(new Phrase(email, dataFont));
-                table.addCell(dataCell);
-                
-                 dataCell.setPhrase(new Phrase(num_tel, dataFont));
-                table.addCell(dataCell);
-
-                dataCell.setPhrase(new Phrase(event_id, dataFont));
-                table.addCell(dataCell);
-            }
-            doc.add(table);
-            doc.close();
-        } catch (FileNotFoundException | DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException ex) {
-            Logger.getLogger(ParticipationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }
+ 
     
      
       public void selectedEvenement(Evenement e){
@@ -477,6 +365,10 @@ public class ParticipationController implements Initializable {
             }
         }
         tableevent.setItems(filteredList);
+    }
+
+    @FXML
+    private void Pdf(ActionEvent event) {
     }
 
 }

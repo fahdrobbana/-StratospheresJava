@@ -14,39 +14,39 @@ public class Participation {
     private int id;
     private int event_id;
     private String nom, prenom, adresse, email;
-     private int num_tel;
+     private int numero;
    
 
     public Participation() {
     }
 
-    public Participation(int id, int event_id, String nom, String prenom, String adresse, String email,int num_tel) {
+    public Participation(int id, int event_id, String nom, String prenom, String adresse, String email,int numero) {
         this.id = id;
         this.event_id = event_id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.email = email;
-        this.num_tel= num_tel;
+        this.numero= numero;
        
     }
 
-    public Participation(int event_id, String nom, String prenom, String adresse, String email, int num_tel) {
+    public Participation(int event_id, String nom, String prenom, String adresse, String email, int numero) {
         this.event_id = event_id;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.email = email;
-        this.num_tel= num_tel;
+        this.numero= numero;
        
     }
 
-    public int getNum_tel() {
-        return num_tel;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNum_tel(int num_tel) {
-        this.num_tel = num_tel;
+    public void setNumero(int numero) {
+        this.numero=numero;
     }
 
     public Participation(int id) {
@@ -103,7 +103,7 @@ public class Participation {
 
     @Override
     public String toString() {
-        return "Participation{" + "id=" + id + ", event_id=" + event_id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + ", num_tel=" + num_tel + '}';
+        return "Participation{" + "id=" + id + ", event_id=" + event_id + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", email=" + email + ", numero=" + numero + '}';
     }
 
   

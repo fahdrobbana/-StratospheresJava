@@ -130,7 +130,7 @@ public class ParticipationBackController implements Initializable {
         colprenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         coladresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-          colnum.setCellValueFactory(new PropertyValueFactory<>("num_tel"));
+          colnum.setCellValueFactory(new PropertyValueFactory<>("numero"));
         colidevent.setCellValueFactory(new PropertyValueFactory<>("event_id"));
 
         tablepartic.setItems(Partic);
@@ -162,7 +162,7 @@ public class ParticipationBackController implements Initializable {
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
-          int num_tel = Integer.valueOf(tfnum.getText());
+          int numero= Integer.valueOf(tfnum.getText());
         String nomEV = cbev.getSelectionModel().getSelectedItem();
 
         if (nom.isEmpty()) {
@@ -184,7 +184,7 @@ public class ParticipationBackController implements Initializable {
             showAlert("Email est vide");
             return false;
         }
-         if (num_tel==0) {
+         if (numero==0) {
             showAlert("Numero est vide");
             return false;
         }
@@ -219,7 +219,7 @@ public class ParticipationBackController implements Initializable {
         String prenom = tfprenom.getText();
         String adresse = tfadresse.getText();
         String email = tfemail.getText();
-         int num_tel = Integer.valueOf(tfnum.getText());
+         int numero= Integer.valueOf(tfnum.getText());
         String nomEV = cbev.getSelectionModel().getSelectedItem();
         int event_id = ev.GetIdEvent(nomEV);
 
@@ -227,7 +227,7 @@ public class ParticipationBackController implements Initializable {
         p.setPrenom(prenom);
         p.setAdresse(adresse);
         p.setEmail(email);
-        p.setNum_tel(num_tel);
+        p.setNumero(numero);
         p.setEvent_id(event_id);
         rv.modifierParticipationPst(p);
         tablepartic.refresh();
@@ -252,7 +252,7 @@ public class ParticipationBackController implements Initializable {
 
     @FXML
     private void backbtnmenu(MouseEvent event) {
-        GotoFXML("evenement", "Evenement", event);
+        GotoFXML("evenement", "Gestion Evenement", event);
     }
 
     @FXML
@@ -263,7 +263,7 @@ public class ParticipationBackController implements Initializable {
         tfprenom.setText(p.getPrenom());
         tfadresse.setText(p.getAdresse());
         tfemail.setText(p.getEmail());
-          tfnum.setText(String.valueOf(p.getNum_tel()));
+          tfnum.setText(String.valueOf(p.getNumero()));
         String nomEvent = ev.GetNomEventbyId(p.getEvent_id());
         cbev.setValue(nomEvent);
     }
@@ -356,7 +356,7 @@ public class ParticipationBackController implements Initializable {
                 String prenom = tablepartic.getColumns().get(1).getCellObservableValue(i).getValue().toString();
                 String adresse = tablepartic.getColumns().get(2).getCellObservableValue(i).getValue().toString();
                 String email = tablepartic.getColumns().get(3).getCellObservableValue(i).getValue().toString();
-                  String num_tel = tablepartic.getColumns().get(4).getCellObservableValue(i).getValue().toString();
+                  String numero = tablepartic.getColumns().get(4).getCellObservableValue(i).getValue().toString();
                 String event_id = tablepartic.getColumns().get(5).getCellObservableValue(i).getValue().toString();
 
                 // Ajout de couleurs de fond et de police différente pour les cellules de données
@@ -377,7 +377,7 @@ public class ParticipationBackController implements Initializable {
                 dataCell.setPhrase(new Phrase(email, dataFont));
                 table.addCell(dataCell);
                 
-                 dataCell.setPhrase(new Phrase(num_tel, dataFont));
+                 dataCell.setPhrase(new Phrase(numero, dataFont));
                 table.addCell(dataCell);
 
                 dataCell.setPhrase(new Phrase(event_id, dataFont));
