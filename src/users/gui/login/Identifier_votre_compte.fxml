@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="users.gui.login.Identifier_votre_compteController">
+   <children>
+      <ListView fx:id="lvUser" layoutX="164.0" layoutY="186.0" onMouseClicked="#EnvoyerToken" prefHeight="230.0" prefWidth="469.0" />
+      <Text layoutX="164.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Identifier votre compte">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="338.0" layoutX="262.0" layoutY="135.0" startX="-97.0" />
+      <Button layoutX="570.0" layoutY="433.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="préc" />
+      <Text layoutX="42.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GFL">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Text>
+      <Label fx:id="ssemails" layoutX="177.0" layoutY="151.0" prefHeight="17.0" prefWidth="129.0" />
+   </children>
+</AnchorPane>
