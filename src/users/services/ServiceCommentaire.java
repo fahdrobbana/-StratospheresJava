@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import users.entity.Commentaire;
-import java.util.Date;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -30,6 +30,7 @@ public class ServiceCommentaire implements IService<Commentaire> {
     Statement ste;
     private PreparedStatement pre;
     private ResultSet rs;
+    public Date date;
 
     public ServiceCommentaire() {
 
@@ -39,25 +40,14 @@ public class ServiceCommentaire implements IService<Commentaire> {
 
     @Override
     public void Ajouter(Commentaire t) {
-        /*   try {
-            
-            //1 creer le statement 
-            ste = con.createStatement();
-            
-            String req = "INSERT INTO `commentaire` (`id`, `id_annonce`, `nom`, `text`, `date`) VALUES ('"+t.getId()+"','"+t.getId_annonce()+"','"+t.getNom()+"',"+t.getText()+"','"+t.getDate()+"');";
-            
-            ste.executeUpdate(req);
-            
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }*/
-        try {
-            PreparedStatement pre = con.prepareStatement("INSERT INTO .`commentaire` (`id_annonce`,`nom`,`text`) VALUES (?,?,?);");
-            pre.setInt(1, t.getId_annonce());
-            pre.setString(2, t.getNom());
-            pre.setString(3, t.getText());
 
+        try {
+            PreparedStatement pre = con.prepareStatement("INSERT INTO .`commentaire` (`id_annonce`,`user_id`,`nom`,`text`,`date`) VALUES (?,?,?,?,?);");
+            pre.setInt(1, t.getId_annonce());
+            pre.setInt(2, t.getUser_id());
+            pre.setString(3, t.getNom());
+            pre.setString(4, t.getText());
+            pre.setDate(5, t.getDate());
             pre.executeUpdate();
             System.out.println("commentaire ajoutée avec succès");
 
@@ -71,14 +61,18 @@ public class ServiceCommentaire implements IService<Commentaire> {
         try {
             String requete = "UPDATE `commentaire` SET"
                     + " `id_annonce`=?,"
+                    + " `user_id`=?,"
                     + " `nom`=?,"
-                    + "`text`=? where `id`=?";
+                    + " `text`=?,"
+                    + "`date`=? where `id`=?";
             PreparedStatement pre = con.prepareStatement(requete);
 
-            pre.setInt(1, t.getId_annonce());
-            pre.setString(2, t.getNom());
-            pre.setString(3, t.getText());
-            pre.setInt(4, t.getId());
+         pre.setInt(1, t.getId_annonce());
+            pre.setInt(2, t.getUser_id());
+            pre.setString(3, t.getNom());
+            pre.setString(4, t.getText());
+            pre.setDate(5, t.getDate());
+            pre.setInt(6, t.getId());
 
             pre.executeUpdate();
             System.out.println("comm modifié avec succès");
@@ -118,9 +112,9 @@ public class ServiceCommentaire implements IService<Commentaire> {
             rs = ste.executeQuery(req);
             while (rs.next()) {//parcourir le resultset
                 String text = rs.getString("text");
-            
-               // text = filterBadWords(text);
-                list.add(new Commentaire(rs.getInt("id"), rs.getInt("id_annonce"), rs.getString("nom"), rs.getString("text")));//, rs.getDate("date")
+
+                // text = filterBadWords(text);
+                list.add(new Commentaire(rs.getInt("id"), rs.getInt("id_annonce"),rs.getInt("user_id"), rs.getString("nom"), rs.getString("text"), rs.getDate("date")));//, rs.getDate("date")
             }
 
         } catch (SQLException ex) {
@@ -129,17 +123,15 @@ public class ServiceCommentaire implements IService<Commentaire> {
         return list;
     }
 
-  /*  public String filterBadWords(String text) {
+    /*  public String filterBadWords(String text) {
     ProfanityFilter filter = new ProfanityFilter();
     return filter.censor(text);
 }*/
-    
     @Override
     public ArrayList<Commentaire> Afficher() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }
 
 /*  @Override

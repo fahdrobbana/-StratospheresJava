@@ -109,7 +109,7 @@ public class Identifier_votre_compteController implements Initializable {
                         User u = userService.getUserByEmai(emailAddress);
                         System.out.println(u);
                         u.setReset_token(token);
-                        userService.modifier(u);
+                        userService.modifierbymail(u);
                         System.out.println(u);
                         userService.sendMail(u, token, "Reset Password!");
                         sendMail(emailAddress, token);

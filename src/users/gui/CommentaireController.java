@@ -25,6 +25,11 @@ import javafx.scene.input.MouseEvent;
 import users.services.ServiceCommentaire;
 import users.entity.Commentaire;
 import users.services.ServiceAnnonce;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import users.services.user_crud;
 
 /**
  * FXML Controller class
@@ -33,14 +38,13 @@ import users.services.ServiceAnnonce;
  */
 public class CommentaireController implements Initializable {
 
-    @FXML
     private TextField tfannonce;
     @FXML
     private TextArea tftext;
     @FXML
     private TextField tfnom;
-    //@FXML
-    //private DatePicker tfdate;
+    @FXML
+    private DatePicker date;
     @FXML
     private TableView<Commentaire> tablecom;
     @FXML
@@ -49,8 +53,8 @@ public class CommentaireController implements Initializable {
     private TableColumn<Commentaire, String> colnom;
     @FXML
     private TableColumn<Commentaire, String> coltext;
-    /*@FXML
-    private TableColumn<Commentaire, Date> coldate;*/
+    @FXML
+    private TableColumn<Commentaire, Date> coldate;
     @FXML
     private Button btnaj;
     @FXML
@@ -62,10 +66,14 @@ public class CommentaireController implements Initializable {
     private ComboBox<String> cmbtitre;
      
     ObservableList<String> noman;
-    
+     @FXML
+    private ComboBox<String> cmbemail;
+         ObservableList<String> emailn;
     
     ServiceCommentaire an = new ServiceCommentaire();
     ServiceAnnonce ann = new ServiceAnnonce();
+   user_crud annn= new user_crud();
+    
 
     /**
      * Initializes the controller class.
@@ -74,16 +82,19 @@ public class CommentaireController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        this.noman = ann.GetNamesAnnonce();
         cmbtitre.setItems(noman);
+        this.emailn= annn.GetEmailUsers();
+         cmbemail.setItems(emailn);
+        
+        
         updateTable();
     }
 
-    @FXML
     public void updateTable() {
         ObservableList<Commentaire> Events = an.readcomm();
         colan.setCellValueFactory(new PropertyValueFactory<>("id_annonce"));
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         coltext.setCellValueFactory(new PropertyValueFactory<>("text"));
-        //  coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+         coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         // Créer un filtre de mauvais mots
     //BadWordFilter filter = new BadWordFilter();
@@ -107,9 +118,10 @@ public class CommentaireController implements Initializable {
 
     public void init() {
         updateTable();
-        tfannonce.clear();
+//       tfannonce.clear();
         tfnom.clear();
         tftext.clear();
+          date.setValue(null);
 
     }
 
@@ -118,6 +130,10 @@ public class CommentaireController implements Initializable {
         System.out.println(e.getId());
         tfnom.setText(e.getNom());
         tftext.setText(e.getText());
+        LocalDate d = Instant.ofEpochMilli(e.getDate().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        date.setValue(d);
         init();
     }
 
@@ -127,8 +143,10 @@ public class CommentaireController implements Initializable {
 
         String nom = tfnom.getText();
         String text = tftext.getText();
+         //Date d = Date.valueOf(date.getValue());
         e.setNom(nom);
         e.setText(text);
+         //e.setDate(d);
         an.Modifier(e);
         updateTable();
     }
@@ -144,11 +162,15 @@ public class CommentaireController implements Initializable {
     @FXML
     private void CreateComm(ActionEvent event) {
         String nomAn = cmbtitre.getSelectionModel().getSelectedItem();
+         String emailu = cmbemail.getSelectionModel().getSelectedItem();
         //String id_annonce = tfannonce.getText();
         String nom = tfnom.getText();
         String text = tftext.getText();
+        Date d = Date.valueOf(date.getValue());
         int annonce_id = ann.GetIdAnnone(nomAn);
-        System.out.println(annonce_id);
+        int user_id = annn.GetIdUser(emailu);
+        System.out.println("id annonce="+annonce_id);
+        System.out.println("id user="+user_id);
 
         if (nom.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -166,15 +188,14 @@ public class CommentaireController implements Initializable {
         } else {
             try {
                // int id_annoncec = Integer.parseInt(id_annonce);
-                Commentaire R1 = new Commentaire(annonce_id, nom, text);
+                Commentaire R1 = new Commentaire(annonce_id, user_id,nom, text,d);
                 ServiceCommentaire cr = new ServiceCommentaire();
                 cr.Ajouter(R1);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Commentaire inséré avec succès!");
-                alert.showAndWait();
+                System.out.println(R1);
                 init();
+        updateTable();
+        AlertWindow("Commentaire ajouté", "Le commentaire a été ajouté avec succès", Alert.AlertType.INFORMATION);
+    
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

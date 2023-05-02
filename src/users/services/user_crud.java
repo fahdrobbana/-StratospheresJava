@@ -17,6 +17,10 @@ import users.utils.MyConnectionn;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -63,7 +67,19 @@ public class user_crud implements Interface<User> {
             System.out.println(ex.getMessage());
         }
     }
-    
+     public void modifierbymail(User U) {
+         String  req ;
+                      System.out.println(U.isBlocked());
+         try {
+           req = "UPDATE `users` SET  `reset_token` = '" + U.getReset_token() +"'where `email` = '" + U.getEmail()+"'";
+            System.out.println(req);
+           PreparedStatement ps = connexion.prepareStatement(req);
+            ps.executeUpdate(req);
+            System.out.println("Informations updated !");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     public void nomodifierblocker(User U) {
          String  req ;
          try {
@@ -322,6 +338,42 @@ public class user_crud implements Interface<User> {
             // log or rethrow the exception
         }
         return user;
+    }
+    
+    private ResultSet rs;
+ public ObservableList<String> GetEmailUsers() {
+     
+        String req = "select email from users";
+
+        ObservableList<String> list = FXCollections.observableArrayList();
+        try {
+            ste = connexion.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {//parcourir le resultset
+                list.add(rs.getString("email"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceAnnonce.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+ public int GetIdUser(String value) {
+        String req = "select id from users where email = '" + value + "';";
+
+        int id = 0;
+        try {
+            ste = connexion.createStatement();
+            rs = ste.executeQuery(req);
+            while (rs.next()) {//parcourir le resultset
+                id = rs.getInt("id");
+
+            }
+
+        } catch (SQLException ex) {
+           
+        }
+        return id;
     }
     
 

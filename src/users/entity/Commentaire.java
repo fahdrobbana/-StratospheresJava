@@ -5,8 +5,8 @@
  */
 package users.entity;
 
-import java.util.Date;
 
+import java.sql.Date;
 
 //import java.sql.Date;
 
@@ -16,29 +16,36 @@ import java.util.Date;
  */
 public class Commentaire {
     
-   int  id;	
-   String   titre;	;
+   int  id ;	
+  // String   titre,email;
     private int id_annonce;
+      int   user_id ;
+  
    String nom ,text;
+   Date date;
 
-    public Commentaire(String titre, String nom, String text) {
-        this.titre = titre;
-        this.nom = nom;
-        this.text = text;
+   public Commentaire() {
     }
-   Date date;	
+   
+    
 
-    public Commentaire(int id, int id_annonce, String nom, String text, Date date) {
-        this.id = id;
+    public Commentaire(int id_annonce, int user_id,  String nom, String text, Date date) {
         this.id_annonce = id_annonce;
+        this.user_id = user_id;
         this.nom = nom;
         this.text = text;
         this.date = date;
     }
 
-    public Commentaire() {
+    public Commentaire(int id, int id_annonce, int user_id, String nom, String text, Date date) {
+        this.id = id;
+        this.id_annonce = id_annonce;
+        this.user_id = user_id;
+        this.nom = nom;
+        this.text = text;
+        this.date = date;
     }
-
+    
     public Commentaire(int id_annonce, String nom, String text, Date date) {
         this.id_annonce = id_annonce;
         this.nom = nom;
@@ -46,34 +53,13 @@ public class Commentaire {
         this.date = date;
     }
 
-    public Commentaire(String nom, String text, Date date) {
-        this.nom = nom;
-        this.text = text;
-        this.date = date;
-    }
-
-    public Commentaire(int id, int id_annonce, String nom, String text) {
-        this.id = id;
-        this.id_annonce = id_annonce;
-        this.nom = nom;
-        this.text = text;
-    }
-
-    public Commentaire(int id_annonce, String nom, String text) {
-        this.id_annonce = id_annonce;
-        this.nom = nom;
-        this.text = text;
-    }
-
-   /* public Commentaire(int id, int id_annonce, String nom, String text, Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
 
     @Override
     public String toString() {
-        return "Commentaire{" + "id_annonce=" + id_annonce + ", nom=" + nom + ", text=" + text + '}';
+        return "Commentaire{" + "id_annonce=" + id_annonce + ", user_id=" + user_id + ", nom=" + nom + ", text=" + text + ", date=" + date + '}';
     }
 
+ 
 
    
 
@@ -92,6 +78,14 @@ public class Commentaire {
     public void setId_annonce(int id_annonce) {
         this.id_annonce = id_annonce;
     }
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+    
 
     public String getNom() {
         return nom;
@@ -116,6 +110,5 @@ public class Commentaire {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    
+ 
 }

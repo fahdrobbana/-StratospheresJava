@@ -91,6 +91,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import users.services.user_crud;
 
 /**
  * FXML Controller class
@@ -155,19 +156,28 @@ public class AjouterAnnonceController implements Initializable {
     private ImageView codeqrr;
     @FXML
     private ImageView imageView;
-
+    @FXML
+    private ComboBox<String> cmbmail;
+ObservableList<String> emailn;
+user_crud annn= new user_crud();
+    @FXML
+    private TableColumn<Annonce, Integer> coluser;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.emailn= annn.GetEmailUsers();
+         cmbmail.setItems(emailn);
         updateTable();
+        
         TFSearch.textProperty().addListener((observable, oldValue, newValue) -> search());
 
     }
 
     public void updateTable() {
         ObservableList<Annonce> Events = an.readAnnonce();
+        coluser.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         colnom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         coltel.setCellValueFactory(new PropertyValueFactory<>("tel"));
         colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -220,7 +230,7 @@ public class AjouterAnnonceController implements Initializable {
 
     @FXML
     private void ajouterAction(ActionEvent event) {
-
+String emailu = cmbmail.getSelectionModel().getSelectedItem();
         String nom = tfnom.getText();
         String tel = tftel.getText();
         String email = tfemail.getText();
@@ -230,7 +240,8 @@ public class AjouterAnnonceController implements Initializable {
         String cat = tfcat.getText();
         String etat = tfetat.getText();
         String image = tfimage.getText();
-
+         
+        int user_id = annn.GetIdUser(emailu);
         if (nom.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("nom doit etre saisi");
@@ -279,11 +290,11 @@ public class AjouterAnnonceController implements Initializable {
             try {
                 int tell = Integer.parseInt(tel);
 
-                Annonce p = new Annonce(nom, image, desc, titre, tell, email, local, etat, cat);
+                Annonce p = new Annonce(user_id,nom, image, desc, titre, tell, email, local, etat, cat);
 
                 ServiceAnnonce sp = new ServiceAnnonce();
                 sp.Ajouter(p);
-
+                System.out.println(p);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information Dialog");
                 alert.setHeaderText(null);
@@ -293,7 +304,7 @@ public class AjouterAnnonceController implements Initializable {
                 notiff();
                 // Envoyer le message WhatsApp avec Twilio
                 String ACCOUNT_SID = "ACd7316a9c80d20818ebe259901e2e7a04";
-                String AUTH_TOKEN = "d21cddc86436c542ccbd0c49b6ff6474";
+                String AUTH_TOKEN = "072bc83c7fff88731ab455ff68e2bcb9";
                 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
                 // Définir les numéros de téléphone de l'expéditeur et du destinataire
@@ -302,9 +313,9 @@ public class AjouterAnnonceController implements Initializable {
 
                 // Créer le message à envoyer
                 String messageBody = "Nouvelle annonce de : " + nom + "  ";
-                Message message = Message.creator(new PhoneNumber(toNumber), new PhoneNumber(fromNumber), messageBody).create();
+//                Message message = Message.creator(new PhoneNumber(toNumber), new PhoneNumber(fromNumber), messageBody).create();
 
-                System.out.println("Message envoyé avec succès ! SID : " + message.getSid());
+//                System.out.println("Message envoyé avec succès ! SID : " + message.getSid());
 
             } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

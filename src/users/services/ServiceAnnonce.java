@@ -40,16 +40,17 @@ public class ServiceAnnonce implements IService<Annonce> {
     @Override
     public void Ajouter(Annonce t) {
         try {
-            PreparedStatement pre = con.prepareStatement("INSERT INTO .`annonce` (`nom`,`image`,`descreption`,`titre`,`tel`,`email`,`local`,`etat`,`categorie`) VALUES (?,?,?,?,?,?,?,?,?);");
-            pre.setString(1, t.getNom());
-            pre.setString(2, t.getImage());
-            pre.setString(3, t.getDescreption());
-            pre.setString(4, t.getTitre());
-            pre.setInt(5, t.getTel());
-            pre.setString(6, t.getEmail());
-            pre.setString(7, t.getLocal());
-            pre.setString(8, t.getEtat());
-            pre.setString(9, t.getCategorie());
+            PreparedStatement pre = con.prepareStatement("INSERT INTO .`annonce` (`user_id`,`nom`,`image`,`descreption`,`titre`,`tel`,`email`,`local`,`etat`,`categorie`) VALUES (?,?,?,?,?,?,?,?,?,?);");
+           pre.setInt(1, t.getUser_id());
+            pre.setString(2, t.getNom());
+            pre.setString(3, t.getImage());
+            pre.setString(4, t.getDescreption());
+            pre.setString(5, t.getTitre());
+            pre.setInt(6, t.getTel());
+            pre.setString(7, t.getEmail());
+            pre.setString(8, t.getLocal());
+            pre.setString(9, t.getEtat());
+            pre.setString(10, t.getCategorie());
             pre.executeUpdate();
             System.out.println("Annonce ajoutée avec succès");
 
@@ -136,17 +137,18 @@ public class ServiceAnnonce implements IService<Annonce> {
 
             while (res.next()) {
                 int id = res.getInt("id");
-                String nom = res.getString(2);
-                String image = res.getString(3);
-                String descreption = res.getString(4);
-                String titre = res.getString(5);
-                int tel = res.getInt(6);
-                String email = res.getString(7);
-                String local = res.getString(8);
-                String etat = res.getString(9);
-                String categorie = res.getString(10);
+                 int user_id = res.getInt("user_id");
+                String nom = res.getString(3);
+                String image = res.getString(4);
+                String descreption = res.getString(5);
+                String titre = res.getString(6);
+                int tel = res.getInt(7);
+                String email = res.getString(8);
+                String local = res.getString(9);
+                String etat = res.getString(10);
+                String categorie = res.getString(11);
 
-                Annonce p = new Annonce(id, nom, image, descreption, titre, tel, email, local, etat, categorie);
+                Annonce p = new Annonce(id, user_id,nom, image, descreption, titre, tel, email, local, etat, categorie);
                 pers.add(p);
             }
         } catch (SQLException ex) {
@@ -188,21 +190,21 @@ public List<Annonce> listAnnonce() {
         PreparedStatement stmt = con.prepareStatement("SELECT * FROM annonce");
         ResultSet res = stmt.executeQuery();
         while (res.next()) {
-           int id = res.getInt("id");
-                String nom = res.getString(2);
-                String image = res.getString(3);
-                String descreption = res.getString(4);
-                String titre = res.getString(5);
-                int tel = res.getInt(6);
-                String email = res.getString(7);
-                String local = res.getString(8);
-                String etat = res.getString(9);
-                String categorie = res.getString(10);
-
-           
+          
+                int id = res.getInt("id");
+                 int user_id = res.getInt("user_id");
+                String nom = res.getString(3);
+                String image = res.getString(4);
+                String descreption = res.getString(5);
+                String titre = res.getString(6);
+                int tel = res.getInt(7);
+                String email = res.getString(8);
+                String local = res.getString(9);
+                String etat = res.getString(10);
+                String categorie = res.getString(11);
             
 
-             Annonce p = new Annonce(id, nom, image, descreption, titre, tel, email, local, etat, categorie);
+             Annonce p = new Annonce(id,user_id ,nom, image, descreption, titre, tel, email, local, etat, categorie);
             annonce.add(p); 
         }
         res.close();
@@ -214,4 +216,3 @@ public List<Annonce> listAnnonce() {
     return annonce;
 }
 }
-    

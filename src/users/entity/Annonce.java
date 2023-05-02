@@ -11,12 +11,17 @@ package users.entity;
  */
 public class Annonce {
     
-    int id ;
+    int id , user_id;
     String nom ,image,descreption,titre;
     int tel ;
     String email,local,etat,categorie;
+    
+    public Annonce() {
+       
+    }
 
-    public Annonce(int id, String nom, String image, String descreption, String titre, int tel, String email, String local, String etat, String categorie) {
+
+   /* public Annonce(int id, String nom, String image, String descreption, String titre, int tel, String email, String local, String etat, String categorie) {
         this.id = id;
         this.nom = nom;
         this.image = image;
@@ -28,8 +33,24 @@ public class Annonce {
         this.etat = etat;
         this.categorie = categorie;
     }
+*/
+   
 
-    public Annonce(String nom, String image, String descreption, String titre, String email, String local, String etat, String categorie) {
+    public Annonce(int id, int user_id, String nom, String image, String descreption, String titre, int tel, String email, String local, String etat, String categorie) {
+        this.id = id;
+        this.user_id = user_id;
+        this.nom = nom;
+        this.image = image;
+        this.descreption = descreption;
+        this.titre = titre;
+        this.tel = tel;
+        this.email = email;
+        this.local = local;
+        this.etat = etat;
+        this.categorie = categorie;
+    }
+
+   /* public Annonce(String nom, String image, String descreption, String titre, String email, String local, String etat, String categorie) {
         this.nom = nom;
         this.image = image;
         this.descreption = descreption;
@@ -38,7 +59,7 @@ public class Annonce {
         this.local = local;
         this.etat = etat;
         this.categorie = categorie;
-    }
+    }*/
 
     public Annonce(String nom, String image, String descreption, String titre, int tel, String email, String local, String etat, String categorie) {
         this.nom = nom;
@@ -52,18 +73,28 @@ public class Annonce {
         this.categorie = categorie;
     }
 
-    public Annonce() {
-       
+    public Annonce(int user_id, String nom, String image, String descreption, String titre, int tel, String email, String local, String etat, String categorie) {
+        this.user_id = user_id;
+        this.nom = nom;
+        this.image = image;
+        this.descreption = descreption;
+        this.titre = titre;
+        this.tel = tel;
+        this.email = email;
+        this.local = local;
+        this.etat = etat;
+        this.categorie = categorie;
     }
 
-    public Annonce(String text, int tell, String text0, String text1, String text2, String text3, String text4, String text5, String text6) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
 
     @Override
     public String toString() {
-        return "Annonce{" + "nom=" + nom + ", image=" + image + ", descreption=" + descreption + ", titre=" + titre + ", tel=" + tel + ", email=" + email + ", local=" + local + ", etat=" + etat + ", categorie=" + categorie + '}';
+        return "Annonce{" + "user_id=" + user_id + ", nom=" + nom + ", image=" + image + ", descreption=" + descreption + ", titre=" + titre + ", tel=" + tel + ", email=" + email + ", local=" + local + ", etat=" + etat + ", categorie=" + categorie + '}';
     }
+
+    
 
     public int getId() {
         return id;
@@ -144,7 +175,13 @@ public class Annonce {
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
+ public int getUser_id() {
+        return user_id;
+    }
 
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
    
     
 }
