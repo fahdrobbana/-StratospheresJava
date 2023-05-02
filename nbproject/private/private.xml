@@ -3,10 +3,42 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/login/LoginController.java</file>
-            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/admin/ProfilAdminController.java</file>
-            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/user_crud.java</file>
-            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/login/Identifier_votre_compteController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AjouterReclamationController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/Acceuil.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/CommentaireController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/ModifierReclamation.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AnnonceAdminController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/StatFXML.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AcceuilAdminController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/MenuController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AjouterReclamation.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/ModifierReclamationController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/Menu.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AjouterAnnonce.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/IServiceReclamation.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/UserInterface.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/ajouterArticle.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/profil/ProfilController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/StatFXMLController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/IService.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/entity/Reclamation.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/entity/Commentaire.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/ServiceArticle.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/ListeDesReclamationController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/CommentaireAdminController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AcceuilAdmin.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/ServiceAnnonce.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AjouterAnnonceController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/entity/Article.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AcceuilController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/ListeDesReclamation.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/entity/Annonce.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/ParticipationService.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/AjouterArticleController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/CommentaireAdmin.fxml</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/gui/UserInterfaceController.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/IServiceArticle.java</file>
+            <file>file:/C:/Users/majdi/Documents/NetBeansProjects/Users/src/users/services/ServiceReclamation.java</file>
         </group>
     </open-files>
 </project-private>

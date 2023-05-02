@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.ObservableList?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="users.gui.AjouterReclamationController">
+    
+    <children>
+      <Pane prefHeight="407.0" prefWidth="600.0" style="-fx-background-color: skyblue;">
+         <children>
+            <Text fill="#f5f4f4" layoutX="176.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une Reclamation" wrappingWidth="286.0">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font></Text>
+            <Text fill="#f8f5f5" layoutX="14.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date  : " wrappingWidth="111.66796875">
+               <font>
+                  <Font size="14.0" />
+               </font></Text>
+            <TextField fx:id="email" layoutX="129.0" layoutY="149.0" prefHeight="33.0" prefWidth="200.0" promptText="useruser@gmail.com" />
+            <TextArea fx:id="message_rep" layoutX="125.0" layoutY="249.0" prefHeight="144.0" prefWidth="200.0" promptText="corps de la reclamation" />
+            <Button fx:id="btnajouter" layoutX="388.0" layoutY="321.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="42.0" prefWidth="149.0" text="ajouter">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Text fill="#f8f4f4" layoutX="13.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email de user :" wrappingWidth="111.66796875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#f8f8f8" layoutX="13.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commentaire:" wrappingWidth="100.66796875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="date_rep" layoutX="129.0" layoutY="105.0" prefHeight="33.0" prefWidth="200.0" />
+            <Text fill="#f8f4f4" layoutX="13.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom:" wrappingWidth="111.66796875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nom" layoutX="129.0" layoutY="201.0" prefHeight="33.0" prefWidth="200.0" promptText=" " />
+            <Text fill="#f8f8f8" layoutX="354.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Respond :" wrappingWidth="121.66796875">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="message_rep1" layoutX="354.0" layoutY="132.0" prefHeight="144.0" prefWidth="200.0" promptText="corps de la reponse" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -293,7 +293,7 @@ public class AjouterAnnonceController implements Initializable {
                 notiff();
                 // Envoyer le message WhatsApp avec Twilio
                 String ACCOUNT_SID = "ACd7316a9c80d20818ebe259901e2e7a04";
-                String AUTH_TOKEN = "072bc83c7fff88731ab455ff68e2bcb9";
+                String AUTH_TOKEN = "d21cddc86436c542ccbd0c49b6ff6474";
                 Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
                 // Définir les numéros de téléphone de l'expéditeur et du destinataire

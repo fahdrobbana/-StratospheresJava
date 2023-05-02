@@ -22,6 +22,7 @@
             <Circle fx:id="c2" fill="DODGERBLUE" layoutX="279.0" layoutY="-22.0" radius="71.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
             <Button layoutX="123.0" layoutY="346.0" mnemonicParsing="false" onAction="#event" text="Event" />
             <Button layoutX="226.0" layoutY="346.0" mnemonicParsing="false" onAction="#Annonce" text="Annonce" />
+            <Button layoutX="350.0" layoutY="340.0" mnemonicParsing="false" onAction="#Articles" text="Articles" />
          </children>
       </Pane>
    </children>
