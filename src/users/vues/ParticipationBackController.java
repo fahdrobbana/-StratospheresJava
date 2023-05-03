@@ -306,7 +306,7 @@ public class ParticipationBackController implements Initializable {
             doc.add(date);
 
             // Ajout du logo
-            String imagePath = getClass().getResource("/ressources/gfllogo.png").getPath();
+            String imagePath = getClass().getResource("../../Images/gfllogo.png").getPath();
             Image logo = Image.getInstance(imagePath);
             float pageWidth = doc.getPageSize().getWidth();
             float logoWidth = 250; // Largeur du logo en pixels
